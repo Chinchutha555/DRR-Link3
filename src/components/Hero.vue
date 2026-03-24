@@ -2,7 +2,7 @@
 import mainPhoto from "../assets/images/hero.svg";
 import { themeColor } from "../data/items";
 
-const heroHeading = "TEST Deploy จ้า";
+const heroHeading = "TEST DEPLOY NETLIFY";
 const buttonSeeFeature = "See Features";
 const buttonPricing = "Pricing";
 </script>
