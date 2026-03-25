@@ -16,8 +16,12 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.1",
     "vite": "^4.4.0"
-  }
+  },
+  "scripts": {
+  "deploy": "gh-pages -d dist"
+}
 }
