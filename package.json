@@ -20,8 +20,5 @@
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.1",
     "vite": "^4.4.0"
-  },
-  "scripts": {
-  "deploy": "gh-pages -d dist"
-}
+  }
 }
