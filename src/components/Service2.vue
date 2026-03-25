@@ -174,8 +174,7 @@ const handleWheel = (e) => {
                   :src="mainPhoto"
                   alt="Image"
                   class="img-fluid"
-                  @click="openImage(mainPhoto)"
-                  style="cursor: zoom-in"
+               
                 />
               </div>
               <div class="item">
