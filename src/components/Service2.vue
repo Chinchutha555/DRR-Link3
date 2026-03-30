@@ -1,11 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import short from "../assets/images/short.png";
 import medium from "../assets/images/medium.png";
 import long from "../assets/images/long.png";
 
 const heading = "Phase 1";
 const subHeading = "ผลการศึกษา";
+const themeColor = "#2563eb";
 
 const items = [
   {
@@ -38,38 +39,116 @@ const total = items.length;
 
 const showModal = ref(false);
 const selectedImage = ref(null);
-const scale = ref(1);
+const selectedItem = ref(null);
 
-const openImage = (img) => {
-  selectedImage.value = img;
-  scale.value = 1;
+const scale = ref(1);
+const translateX = ref(0);
+const translateY = ref(0);
+const isDragging = ref(false);
+
+let startX = 0;
+let startY = 0;
+let originX = 0;
+let originY = 0;
+
+const MIN_SCALE = 1;
+const MAX_SCALE = 5;
+const SCALE_STEP = 0.25;
+
+const imageTransform = computed(() => {
+  return `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`;
+});
+
+const openImage = (item) => {
+  selectedItem.value = item;
+  selectedImage.value = item.photo;
+  resetZoom();
   showModal.value = true;
+  document.body.style.overflow = "hidden";
 };
 
 const closeImage = () => {
   showModal.value = false;
-  scale.value = 1;
-};
-
-const zoomIn = () => {
-  if (scale.value < 5) scale.value += 0.25;
-};
-
-const zoomOut = () => {
-  if (scale.value > 1) scale.value -= 0.25;
+  selectedImage.value = null;
+  selectedItem.value = null;
+  resetZoom();
+  document.body.style.overflow = "";
 };
 
 const resetZoom = () => {
   scale.value = 1;
+  translateX.value = 0;
+  translateY.value = 0;
+  isDragging.value = false;
+};
+
+const zoomIn = () => {
+  scale.value = Math.min(MAX_SCALE, +(scale.value + SCALE_STEP).toFixed(2));
+};
+
+const zoomOut = () => {
+  const next = Math.max(MIN_SCALE, +(scale.value - SCALE_STEP).toFixed(2));
+  scale.value = next;
+
+  if (next === 1) {
+    translateX.value = 0;
+    translateY.value = 0;
+  }
 };
 
 const handleWheel = (e) => {
-  if (e.deltaY < 0 && scale.value < 5) {
-    scale.value += 0.1;
-  } else if (e.deltaY > 0 && scale.value > 1) {
-    scale.value -= 0.1;
+  if (!showModal.value) return;
+  e.preventDefault();
+
+  if (e.deltaY < 0) {
+    zoomIn();
+  } else {
+    zoomOut();
   }
 };
+
+const startDrag = (event) => {
+  if (scale.value <= 1) return;
+
+  isDragging.value = true;
+  startX = event.clientX;
+  startY = event.clientY;
+  originX = translateX.value;
+  originY = translateY.value;
+};
+
+const onDrag = (event) => {
+  if (!isDragging.value) return;
+
+  translateX.value = originX + (event.clientX - startX);
+  translateY.value = originY + (event.clientY - startY);
+};
+
+const stopDrag = () => {
+  isDragging.value = false;
+};
+
+const handleKeydown = (event) => {
+  if (!showModal.value) return;
+
+  if (event.key === "Escape") closeImage();
+  if (event.key === "+" || event.key === "=") zoomIn();
+  if (event.key === "-") zoomOut();
+  if (event.key === "0") resetZoom();
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("mousemove", onDrag);
+  window.addEventListener("mouseup", stopDrag);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleKeydown);
+  window.removeEventListener("mousemove", onDrag);
+  window.removeEventListener("mouseup", stopDrag);
+  document.body.style.overflow = "";
+});
 </script>
 
 <template>
@@ -77,7 +156,6 @@ const handleWheel = (e) => {
     <div class="container">
       <div class="row justify-content-between">
         <!-- LEFT -->
-
         <div class="col-lg-5 order-lg-2 js-custom-dots">
           <div class="text-right" style="margin-bottom: 30px">
             <span class="caption" :style="[{ color: themeColor }]">
@@ -85,17 +163,15 @@ const handleWheel = (e) => {
             </span>
             <h3 class="heading mb-0">{{ subHeading }}</h3>
           </div>
-          <a
-  v-for="(item, index) in items"
-  :key="item.id"
-  class="service link horizontal d-flex phase-card"
-  :class="{ active: index === 0 }"
-  data-aos="fade-left"
-  :data-aos-delay="index * 200"
->
 
+          <a
+            v-for="(item, index) in items"
+            :key="item.id"
+            class="service link horizontal d-flex phase-card"
+            :class="{ active: index === 0 }"
+            data-aos="fade-left"
+          >
             <div class="service-icon mb-4" :class="item.colorClass">
-              <!-- icon 1 -->
               <svg
                 v-if="item.icon === 'app-indicator'"
                 class="bi bi-app-indicator"
@@ -111,9 +187,7 @@ const handleWheel = (e) => {
                 />
                 <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               </svg>
-              
 
-              <!-- icon 2 -->
               <svg
                 v-else-if="item.icon === 'arrow-repeat'"
                 class="bi bi-arrow-repeat"
@@ -133,7 +207,6 @@ const handleWheel = (e) => {
                 />
               </svg>
 
-              <!-- icon 3 -->
               <svg
                 v-else-if="item.icon === 'briefcase'"
                 class="bi bi-briefcase"
@@ -153,7 +226,6 @@ const handleWheel = (e) => {
                 />
               </svg>
 
-              <!-- icon 4 -->
               <svg
                 v-else
                 class="bi bi-collection"
@@ -187,7 +259,7 @@ const handleWheel = (e) => {
                   :src="item.photo"
                   alt="Image"
                   class="img-fluid clickable-image"
-                  @click="openImage(item.photo)"
+                  @click="openImage(item)"
                 />
               </div>
             </div>
@@ -196,29 +268,59 @@ const handleWheel = (e) => {
       </div>
     </div>
 
-    <!-- Modal -->
-    <div
-      v-if="showModal"
-      class="image-modal"
-      @click.self="closeImage"
-      @wheel.prevent="handleWheel"
-    >
-      <div class="modal-toolbar">
-        <button type="button" @click.stop="zoomOut">−</button>
-        <button type="button" @click.stop="zoomIn">+</button>
-        <button type="button" @click.stop="resetZoom">รีเซ็ต</button>
-        <button type="button" class="close-btn" @click.stop="closeImage">
-          ✕
-        </button>
-      </div>
+    <teleport to="body">
+      <transition name="modal-fade">
+        <div
+          v-if="showModal"
+          class="image-modal"
+          @click.self="closeImage"
+        >
+          <div class="image-modal-content">
+            <button
+              type="button"
+              class="close-btn"
+              @click="closeImage"
+              aria-label="ปิดหน้าต่าง"
+            >
+              ×
+            </button>
 
-      <img
-        :src="selectedImage"
-        alt="Preview"
-        class="modal-img"
-        :style="{ transform: `scale(${scale})` }"
-      />
-    </div>
+            <div class="image-modal-header">
+              <div class="modal-title-group">
+                <strong>{{ heading }}</strong>
+                <span class="modal-divider">|</span>
+                <span>{{ selectedItem?.name || subHeading }}</span>
+              </div>
+
+              <div class="zoom-controls">
+                <button type="button" class="zoom-btn" @click="zoomOut">−</button>
+                <span class="zoom-level">{{ Math.round(scale * 100) }}%</span>
+                <button type="button" class="zoom-btn" @click="zoomIn">+</button>
+                <button type="button" class="zoom-reset-btn" @click="resetZoom">
+                  รีเซ็ต
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="modal-image-stage"
+              @wheel.prevent="handleWheel"
+              @mousedown="startDrag"
+              @dblclick="resetZoom"
+            >
+              <img
+                :src="selectedImage"
+                alt="Preview"
+                class="modal-image"
+                :class="{ dragging: isDragging, zoomable: scale > 1 }"
+                :style="{ transform: imageTransform }"
+                draggable="false"
+              />
+            </div>
+          </div>
+        </div>
+      </transition>
+    </teleport>
   </div>
 </template>
 
@@ -316,97 +418,193 @@ const handleWheel = (e) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .item img {
   display: block;
-  margin: 0 auto;   /* จัดกลางแนวนอน */
+  margin: 0 auto;
 }
 
 .img-shadow {
-  padding: 24px 14px; /* เดิม 14px → เพิ่มบนล่าง */
+  padding: 24px 14px;
 }
-/* image section คง logic เดิม แค่เก็บงานภาพให้ดูนุ่มขึ้น */
+
 .img-shadow {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 22px;
   padding: 14px;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-
   display: flex;
-  align-items: center;     /* จัดกลางแนวตั้ง */
-  justify-content: center; /* จัดกลางแนวนอน */
+  align-items: center;
+  justify-content: center;
   min-height: 100%;
 }
 
-
 .number {
   position: absolute;
-  bottom: 14px;          /* จาก top → bottom */
-  left: 50%;             /* ดันไปกลาง */
-  transform: translateX(-50%); /* จัดให้อยู่กลางจริง */
-
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.75);
   color: #fff;
   font-size: 12px;
   font-weight: 600;
+  padding: 6px 10px;
 }
 
-.image-modal {
+/* modal */
+:global(.image-modal) {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 9999;
+  background: rgba(15, 23, 42, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+:global(.image-modal-content) {
+  position: relative;
+  width: min(1200px, 96vw);
+  height: min(90vh, 900px);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 20px 16px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+:global(.image-modal-header) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #334155;
+  font-size: 15px;
+  padding-right: 44px;
+  flex-wrap: wrap;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+:global(.modal-divider) {
+  color: #cbd5e1;
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zoom-btn,
+.zoom-reset-btn {
+  border: 1px solid #dbe3ef;
+  background: #ffffff;
+  color: #1e293b;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.zoom-btn {
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.zoom-reset-btn {
+  height: 38px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.zoom-btn:hover,
+.zoom-reset-btn:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.zoom-level {
+  min-width: 58px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.modal-image-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 14px;
+  position: relative;
+}
+
+:global(.modal-image) {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.12s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+:global(.modal-image.zoomable) {
   cursor: grab;
 }
 
-.modal-toolbar {
+:global(.modal-image.dragging) {
+  cursor: grabbing;
+  transition: none;
+}
+
+:global(.close-btn) {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  gap: 8px;
-  z-index: 10000;
-}
-
-.modal-toolbar button {
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  color: #222;
-  padding: 8px 12px;
-  border-radius: 8px;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 24px;
+  line-height: 1;
   cursor: pointer;
-  font-size: 16px;
 }
 
-.modal-toolbar button:hover {
-  background: #fff;
+:global(.close-btn:hover) {
+  background: #dbeafe;
 }
 
-.modal-img {
-  max-width: 90%;
-  max-height: 90%;
-  user-select: none;
-  transition: transform 0.15s ease;
-  transform-origin: center center;
-  cursor: default;
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
 }
 
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
 }
 </style>

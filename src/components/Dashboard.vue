@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from "vue";
-import ProjectMap from "../components/Map.vue";
+import { ref, computed, onMounted, watch, nextTick } from "vue";
+import ProjectMap from "../components/Dashboard_filter.vue";
 
 const selectedTab = ref("phase1");
 
@@ -10,6 +10,8 @@ const dashboardData = computed(() => {
       routeCount: 28,
       routeLabel: "สายทางในระยะ Phase 2",
       distance: "1,245.80",
+      progress: 68,
+      progressLabel: "ความคืบหน้า",
     };
   }
 
@@ -17,7 +19,23 @@ const dashboardData = computed(() => {
     routeCount: 18,
     routeLabel: "สายทางในระยะ Phase 1",
     distance: "842.35",
+    progress: 42,
+    progressLabel: "ความคืบหน้า",
   };
+});
+
+onMounted(() => {
+  AOS.init({
+    duration: 700,
+    easing: "ease-out-cubic",
+    once: true,
+    offset: 60,
+  });
+});
+
+watch(selectedTab, async () => {
+  await nextTick();
+  AOS.refresh();
 });
 </script>
 
@@ -31,7 +49,7 @@ const dashboardData = computed(() => {
       ความคืบหน้าโครงการ
     </h3>
 
-    <div class="tabs">
+    <div class="tabs" data-aos="fade-up" data-aos-delay="100">
       <button
         type="button"
         :class="['tab-button', { 'active-tab': selectedTab === 'phase1' }]"
@@ -50,26 +68,58 @@ const dashboardData = computed(() => {
     </div>
 
     <div class="container">
-      <!-- 🔷 แถวบน -->
+      <!-- TOP ROW: 2 กล่อง -->
       <div class="top-row">
-        <div class="box stat-box">
+        <div class="box stat-box" data-aos="fade-right" data-aos-delay="150">
           <h3>จำนวนสายทาง</h3>
           <p class="stat-value">{{ dashboardData.routeCount }}</p>
-          <!-- <p class="stat-label">{{ dashboardData.routeLabel }}</p> -->
         </div>
 
-        <div class="box stat-box">
+        <div class="box stat-box" data-aos="fade-left" data-aos-delay="200">
           <h3>ระยะทางรวม</h3>
           <p class="stat-value">
             {{ dashboardData.distance }}
             <span class="stat-label">กิโลเมตร</span>
           </p>
         </div>
+        
       </div>
 
-      <!-- 🔷 แถวล่าง -->
+            <!-- PROGRESS ROW: เต็มแถว -->
+      <div class="progress-row">
+        <div class="box progress-box" data-aos="fade-up" data-aos-delay="280">
+          <div class="progress-header">
+            <h3>{{ dashboardData.progressLabel }}</h3>
+            <span class="progress-percent">{{ dashboardData.progress }}%</span>
+          </div>
+
+          <div class="single-progress-wrap">
+            <div class="single-progress-top">
+              <span class="progress-phase">
+                {{ selectedTab === "phase1" ? "Phase 1" : "Phase 2" }}
+              </span>
+            </div>
+
+            <div class="progress-bar">
+              <div
+                class="progress-fill active"
+                :style="{ width: dashboardData.progress + '%' }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <!-- MAP ROW: ไม่ยุ่งกับรูป -->
       <div class="bottom-row">
-        <div class="box full-width">
+        <div
+          class="box full-width"
+          data-aos="zoom-in-up"
+          data-aos-delay="250"
+          data-aos-duration="800"
+        >
           <ProjectMap :phase="selectedTab" />
         </div>
       </div>
@@ -117,21 +167,6 @@ const dashboardData = computed(() => {
   color: #ffffff;
 }
 
-.left-section {
-  width: 66.66%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.right-section {
-  width: 33.33%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
 .box {
   background-color: #ffffff;
   padding: 24px;
@@ -141,42 +176,12 @@ const dashboardData = computed(() => {
   transition: all 0.25s ease;
 }
 
-.full-height {
-  flex-grow: 1;
-}
-
-.map-card {
-  height: 100%;
-}
-
 .heading {
   color: #0f172a;
   font-weight: 800;
 }
 
-@media screen and (max-width: 992px) {
-  .left-section,
-  .right-section {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 12px;
-  }
-
-  .left-section,
-  .right-section {
-    padding: 12px;
-  }
-
-  .stat-value {
-    font-size: 32px;
-  }
-}
-
-/* 🔷 แถวบน */
+/* TOP ROW */
 .top-row {
   width: 100%;
   display: flex;
@@ -184,13 +189,27 @@ const dashboardData = computed(() => {
   margin-bottom: 20px;
 }
 
-/* ให้ 2 กล่องเท่ากัน */
 .top-row .box {
-  width: 50%;
+  width: calc(50% - 10px);
 }
 
-/* 🔷 แถวล่าง */
+/* MAP ROW */
 .bottom-row {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.bottom-row .box {
+  width: 100%;
+}
+
+/* PROGRESS ROW */
+.progress-row {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.progress-row .box {
   width: 100%;
 }
 
@@ -198,10 +217,11 @@ const dashboardData = computed(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  min-height: 170px;
 }
 
-.stat-box h3 {
+.stat-box h3,
+.progress-box h3 {
   margin: 0 0 16px;
   font-size: 22px;
   font-weight: 700;
@@ -217,10 +237,106 @@ const dashboardData = computed(() => {
 }
 
 .stat-label {
-  margin-top: 10px;
+  margin-left: 8px;
   color: #64748b;
   font-size: 15px;
+  font-weight: 500;
 }
 
+.progress-box {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.progress-percent {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2563eb;
+  line-height: 1;
+}
+
+.single-progress-wrap {
+  margin-top: 8px;
+}
+
+.single-progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-phase {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #93c5fd 0%, #60a5fa 45%, #2563eb 100%);
+  transition: width 0.4s ease;
+}
+
+.progress-fill.active {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.full-width {
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .top-row {
+    flex-wrap: wrap;
+  }
+
+  .top-row .box {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 12px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .stat-value {
+    font-size: 32px;
+  }
+
+  .progress-percent {
+    font-size: 24px;
+  }
+
+  .box {
+    padding: 20px;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>
