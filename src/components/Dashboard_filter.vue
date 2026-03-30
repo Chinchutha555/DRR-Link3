@@ -41,7 +41,7 @@ const regionNameMap = {
 };
 
 const phaseLabel = computed(() =>
-  props.phase === "phase2" ? "Phase 2" : "Phase 1"
+  props.phase === "phase2" ? "Phase 2" : "Phase 1",
 );
 
 const regionLabel = computed(() => regionNameMap[selectedRegion.value]);
@@ -65,15 +65,21 @@ const imageTransform = computed(() => {
   return `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`;
 });
 
-function zoomToRegion(regionKey) {
-  selectedRegion.value = regionKey;
-}
+// ✅ เช็คว่า zoom อยู่ไหม
+const isZoomed = computed(() => scale.value > 1);
 
+// ✅ reset (มี validate)
 function resetZoom() {
+  if (scale.value <= 1) return;
+
   scale.value = 1;
   translateX.value = 0;
   translateY.value = 0;
   isDragging.value = false;
+}
+
+function zoomToRegion(regionKey) {
+  selectedRegion.value = regionKey;
 }
 
 function openPreview() {
@@ -117,6 +123,7 @@ function handleWheel(event) {
 function startDrag(event) {
   if (scale.value <= 1) return;
 
+  event.preventDefault();
   isDragging.value = true;
   startX = event.clientX;
   startY = event.clientY;
@@ -149,7 +156,7 @@ watch(
   () => {
     selectedRegion.value = "north";
     resetZoom();
-  }
+  },
 );
 
 watch(selectedRegion, () => {
@@ -180,7 +187,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="project-map" data-aos="fade-right">
     <div class="map-header">
-      <h3 class="map-title">รูปภาพโครงการ</h3>
+      <h3 class="map-title">รูปภาพสายทาง</h3>
 
       <div class="map-toolbar">
         <button
@@ -242,10 +249,20 @@ onBeforeUnmount(() => {
               </div>
 
               <div class="zoom-controls">
-                <button type="button" class="zoom-btn" @click="zoomOut">−</button>
+                <button type="button" class="zoom-btn" @click="zoomOut">
+                  −
+                </button>
                 <span class="zoom-level">{{ Math.round(scale * 100) }}%</span>
-                <button type="button" class="zoom-btn" @click="zoomIn">+</button>
-                <button type="button" class="zoom-reset-btn" @click="resetZoom">
+                <button type="button" class="zoom-btn" @click="zoomIn">
+                  +
+                </button>
+
+                <button
+                  type="button"
+                  class="zoom-reset-btn"
+                  :disabled="!isZoomed"
+                  @click="resetZoom"
+                >
                   รีเซ็ต
                 </button>
               </div>
@@ -253,6 +270,7 @@ onBeforeUnmount(() => {
 
             <div
               class="modal-image-stage"
+              :class="{ zoomable: scale > 1, dragging: isDragging }"
               @wheel.prevent="handleWheel"
               @mousedown="startDrag"
               @dblclick="resetZoom"
@@ -261,9 +279,8 @@ onBeforeUnmount(() => {
                 :src="currentImage"
                 :alt="`${phaseLabel} - ${regionLabel}`"
                 class="modal-image"
-                :class="{ dragging: isDragging, zoomable: scale > 1 }"
-                :style="{ transform: imageTransform }"
                 draggable="false"
+                :style="{ transform: imageTransform }"
               />
             </div>
           </div>
@@ -494,25 +511,24 @@ onBeforeUnmount(() => {
   cursor: default;
 }
 
+.modal-image-stage.zoomable {
+  cursor: grab;
+}
+
+.modal-image-stage.dragging {
+  cursor: grabbing;
+}
+
 :global(.modal-image) {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   display: block;
   transform-origin: center center;
-  transition: transform 0.12s ease;
+  transition: none;
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
-}
-
-:global(.modal-image.zoomable) {
-  cursor: grab;
-}
-
-:global(.modal-image.dragging) {
-  cursor: grabbing;
-  transition: none;
 }
 
 :global(.close-btn) {
@@ -584,5 +600,31 @@ onBeforeUnmount(() => {
     width: 100%;
     flex-wrap: wrap;
   }
+}
+
+.image-button {
+  outline: none;
+  border: none;
+}
+
+.image-button:focus,
+.image-button:focus-visible,
+.image-button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.zoom-reset-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #e2e8f0;
 }
 </style>

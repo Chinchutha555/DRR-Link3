@@ -528,4 +528,11 @@ const scrollToCurrent = () => {
     min-height: auto;
   }
 }
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
 </style>

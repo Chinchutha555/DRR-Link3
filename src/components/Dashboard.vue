@@ -44,7 +44,7 @@ watch(selectedTab, async () => {
     <h3
       class="heading text-center"
       data-aos="fade-up"
-      style="margin-bottom: 40px"
+      style="margin-bottom: 35px"
     >
       ความคืบหน้าโครงการ
     </h3>
@@ -72,7 +72,10 @@ watch(selectedTab, async () => {
       <div class="top-row">
         <div class="box stat-box" data-aos="fade-right" data-aos-delay="150">
           <h3>จำนวนสายทาง</h3>
-          <p class="stat-value">{{ dashboardData.routeCount }}</p>
+          <p class="stat-value">
+            {{ dashboardData.routeCount }}
+            <span class="stat-label">สายทาง</span>
+          </p>
         </div>
 
         <div class="box stat-box" data-aos="fade-left" data-aos-delay="200">
@@ -82,10 +85,9 @@ watch(selectedTab, async () => {
             <span class="stat-label">กิโลเมตร</span>
           </p>
         </div>
-        
       </div>
 
-            <!-- PROGRESS ROW: เต็มแถว -->
+      <!-- PROGRESS ROW: เต็มแถว -->
       <div class="progress-row" data-aos="fade-right">
         <div class="box progress-box">
           <div class="progress-header">
@@ -109,8 +111,6 @@ watch(selectedTab, async () => {
           </div>
         </div>
       </div>
-
-      
 
       <!-- MAP ROW: ไม่ยุ่งกับรูป -->
       <div class="bottom-row">
@@ -176,10 +176,10 @@ watch(selectedTab, async () => {
   transition: all 0.25s ease;
 }
 
-.heading {
+/* .heading {
   color: #0f172a;
   font-weight: 800;
-}
+} */
 
 /* TOP ROW */
 .top-row {
@@ -198,7 +198,7 @@ watch(selectedTab, async () => {
   width: 100%;
   margin-bottom: 20px;
 
-   transition:
+  transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -215,7 +215,7 @@ watch(selectedTab, async () => {
   width: 100%;
   margin-bottom: 20px;
 
-   transition:
+  transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -231,8 +231,11 @@ watch(selectedTab, async () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* background: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #eef2ff 100%);
+  border: 1px solid #e2e8f0;
+   box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08); */
 
-   transition:
+  transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -242,7 +245,7 @@ watch(selectedTab, async () => {
 
 .stat-box h3,
 .progress-box h3 {
-  margin: 0 0 16px;
+  margin: 0 0 px;
   font-size: 22px;
   font-weight: 700;
   color: #1e293b;
@@ -254,6 +257,9 @@ watch(selectedTab, async () => {
   font-weight: 800;
   color: #2563eb;
   line-height: 1.1;
+  position: relative;
+  display: flex;
+  align-items: baseline;
 }
 
 .stat-label {
@@ -261,6 +267,10 @@ watch(selectedTab, async () => {
   color: #64748b;
   font-size: 15px;
   font-weight: 500;
+  float: right;
+  right: 0;
+  bottom: 0;
+  margin-left: auto;
 }
 
 .progress-box {
@@ -358,5 +368,12 @@ watch(selectedTab, async () => {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
 }
 </style>

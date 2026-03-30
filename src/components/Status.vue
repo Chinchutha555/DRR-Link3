@@ -61,11 +61,9 @@ const timelineItems = [
         data-aos-duration="900"
         data-aos-once="true"
       >
-        <h2 style="font-size: 38px; margin-bottom: 20px">
-          สถานะการดำเนินงานปัจจุบัน
-        </h2>
+        <h2 class="section-title">สถานะการดำเนินงานปัจจุบัน</h2>
 
-        <p class="max-w-2xl mx-auto leading-7">
+        <p class="section-desc max-w-2xl mx-auto leading-7">
           เรากำลังดำเนินการสำรวจภาคสนามและรับฟังความคิดเห็นจากทุกภาคส่วนอย่างเข้มข้น
           เพื่อให้ได้ข้อมูลที่แม่นยำและตอบโจทย์ต่อความต้องการของคนในพื้นที่มากที่สุด
         </p>
@@ -75,9 +73,9 @@ const timelineItems = [
       <div class="relative">
         <!-- center line -->
         <div
-          class="absolute left-1/2 top-0 hidden md:block h-full w-px bg-slate-200 -translate-x-1/2"
+          class="timeline-line absolute left-1/2 top-0 hidden md:block h-full w-px -translate-x-1/2"
           data-aos="zoom-in"
-          data-aos-duration="00"
+          data-aos-duration="700"
           data-aos-once="true"
         ></div>
 
@@ -97,16 +95,16 @@ const timelineItems = [
               data-aos-once="true"
             >
               <div
-                class="status-card rounded-3xl border-1 p-6 transition duration-300 hover:-translate-y-1"
+                class="status-card rounded-3xl border-1 p-6"
                 :class="{
-                  'bg-blue-50 border-blue-400': item.color === 'blue',
-                  'bg-green-50 border-green-400': item.color === 'green',
-                  'bg-slate-50 border-slate-300': item.color === 'gray',
+                  'bg-blue-50 border-blue-300': item.color === 'blue',
+                  'bg-green-50 border-green-300': item.color === 'green',
+                  'bg-slate-50 border-slate-200': item.color === 'gray',
                 }"
               >
-                <div class="flex items-start justify-between mb-4">
+                <div class="flex items-start justify-between mb-4 gap-3">
                   <span
-                    class="inline-flex rounded-md px-3 py-1 text-[11px] font-bold tracking-wider"
+                    class="status-badge inline-flex"
                     :class="{
                       'bg-blue-100 text-blue-700': item.color === 'blue',
                       'bg-green-100 text-green-700': item.color === 'green',
@@ -115,13 +113,17 @@ const timelineItems = [
                   >
                     {{ item.status }}
                   </span>
-                  <span class="text-xs text-slate-400">{{ item.date }}</span>
+                  <span class="card-date text-xs text-slate-400">{{
+                    item.date
+                  }}</span>
                 </div>
 
-                <h3 class="text-2xl font-extrabold text-slate-900 mb-3">
+                <h3
+                  class="card-title text-2xl font-extrabold text-slate-900 mb-3"
+                >
                   {{ item.title }}
                 </h3>
-                <p class="text-sm leading-7 text-slate-500">
+                <p class="card-desc text-sm leading-7 text-slate-500">
                   {{ item.desc }}
                 </p>
               </div>
@@ -137,7 +139,7 @@ const timelineItems = [
               data-aos-once="true"
             >
               <div
-                class="w-12 h-12 rounded-full bg-white shadow-lg border border-slate-100 flex items-center justify-center"
+                class="timeline-dot-outer w-12 h-12 rounded-full bg-white border border-slate-100 flex items-center justify-center"
               >
                 <div
                   class="w-3 h-3 rounded-full"
@@ -160,16 +162,16 @@ const timelineItems = [
               data-aos-once="true"
             >
               <div
-                class="status-card rounded-3xl border-1 p-6 transition duration-300 hover:-translate-y-1"
+                class="status-card rounded-3xl border-1 p-6"
                 :class="{
-                  'bg-blue-50 border-blue-400': item.color === 'blue',
-                  'bg-green-50 border-green-400': item.color === 'green',
-                  'bg-slate-50 border-slate-300': item.color === 'gray',
+                  'bg-blue-50 border-blue-300': item.color === 'blue',
+                  'bg-green-50 border-green-300': item.color === 'green',
+                  'bg-slate-50 border-slate-200': item.color === 'gray',
                 }"
               >
-                <div class="flex items-start justify-between mb-4">
+                <div class="flex items-start justify-between mb-4 gap-3">
                   <span
-                    class="inline-flex rounded-md px-3 py-1 text-[11px] font-bold tracking-wider"
+                    class="status-badge inline-flex"
                     :class="{
                       'bg-blue-100 text-blue-700': item.color === 'blue',
                       'bg-green-100 text-green-700': item.color === 'green',
@@ -178,13 +180,17 @@ const timelineItems = [
                   >
                     {{ item.status }}
                   </span>
-                  <span class="text-xs text-slate-400">{{ item.date }}</span>
+                  <span class="card-date text-xs text-slate-400">{{
+                    item.date
+                  }}</span>
                 </div>
 
-                <h3 class="text-2xl font-extrabold text-slate-900 mb-3">
+                <h3
+                  class="card-title text-2xl font-extrabold text-slate-900 mb-3"
+                >
                   {{ item.title }}
                 </h3>
-                <p class="text-sm leading-7 text-slate-500">
+                <p class="card-desc text-sm leading-7 text-slate-500">
                   {{ item.desc }}
                 </p>
               </div>
@@ -198,18 +204,146 @@ const timelineItems = [
 </template>
 
 <style scoped>
+/* ===== SECTION ===== */
+.section-title {
+  font-size: 38px;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
 
-.status-card{
-    transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    background-color 0.25s ease;
+.section-desc {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #64748b;
+}
+
+/* ===== TIMELINE LINE ===== */
+.timeline-line {
+  background: linear-gradient(to bottom, #e2e8f0 0%, #cbd5f5 50%, #e2e8f0 100%);
+  opacity: 0.9;
+}
+
+/* ===== CARD ===== */
+.status-card {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  background: #ffffff;
+
   box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* ===== SOFT GRADIENT ===== */
+.status-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  z-index: 0;
+}
+
+/* ===== HOVER ===== */
+.status-card:hover::before {
+  opacity: 1;
 }
 
 .status-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.1);
+  transform: translateY(-3px);
+
+  /* 🔵 กรอบฟ้า */
+  border-color: #93c5fd;
+
+  /* 🔵 glow ฟ้าแบบนุ่ม */
+  box-shadow:
+    0 12px 28px rgba(37, 99, 235, 0.12),
+    0 0 0 1px rgba(147, 197, 253, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* ===== CONTENT ABOVE EFFECT ===== */
+.status-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== BADGE ===== */
+.status-badge {
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1;
+}
+
+/* ===== DATE ===== */
+.card-date {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* ===== TITLE ===== */
+.card-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+}
+
+/* ===== DESCRIPTION ===== */
+.card-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+/* ===== CENTER DOT ===== */
+.timeline-dot-outer {
+  box-shadow:
+    0 6px 14px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ===== MOBILE ===== */
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .status-card {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.65;
+  }
 }
 </style>

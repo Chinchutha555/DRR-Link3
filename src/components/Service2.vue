@@ -59,10 +59,24 @@ const imageTransform = computed(() => {
   return `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`;
 });
 
+const isZoomed = computed(() => scale.value > 1);
+
+const forceResetZoom = () => {
+  scale.value = 1;
+  translateX.value = 0;
+  translateY.value = 0;
+  isDragging.value = false;
+};
+
+const resetZoom = () => {
+  if (scale.value <= 1) return;
+  forceResetZoom();
+};
+
 const openImage = (item) => {
   selectedItem.value = item;
   selectedImage.value = item.photo;
-  resetZoom();
+  forceResetZoom();
   showModal.value = true;
   document.body.style.overflow = "hidden";
 };
@@ -71,15 +85,8 @@ const closeImage = () => {
   showModal.value = false;
   selectedImage.value = null;
   selectedItem.value = null;
-  resetZoom();
+  forceResetZoom();
   document.body.style.overflow = "";
-};
-
-const resetZoom = () => {
-  scale.value = 1;
-  translateX.value = 0;
-  translateY.value = 0;
-  isDragging.value = false;
 };
 
 const zoomIn = () => {
@@ -110,6 +117,7 @@ const handleWheel = (e) => {
 const startDrag = (event) => {
   if (scale.value <= 1) return;
 
+  event.preventDefault();
   isDragging.value = true;
   startX = event.clientX;
   startY = event.clientY;
@@ -155,7 +163,6 @@ onBeforeUnmount(() => {
   <div class="untree_co-section bg-light" id="result-section">
     <div class="container">
       <div class="row justify-content-between">
-        <!-- LEFT -->
         <div class="col-lg-5 order-lg-2 js-custom-dots">
           <div class="text-right" style="margin-bottom: 30px">
             <span class="caption" :style="[{ color: themeColor }]">
@@ -249,7 +256,6 @@ onBeforeUnmount(() => {
           </a>
         </div>
 
-        <!-- RIGHT -->
         <div class="col-lg-7">
           <div class="img-shadow rounded-xl">
             <div class="owl-single no-dots owl-carousel">
@@ -270,11 +276,7 @@ onBeforeUnmount(() => {
 
     <teleport to="body">
       <transition name="modal-fade">
-        <div
-          v-if="showModal"
-          class="image-modal"
-          @click.self="closeImage"
-        >
+        <div v-if="showModal" class="image-modal" @click.self="closeImage">
           <div class="image-modal-content">
             <button
               type="button"
@@ -293,10 +295,19 @@ onBeforeUnmount(() => {
               </div>
 
               <div class="zoom-controls">
-                <button type="button" class="zoom-btn" @click="zoomOut">−</button>
+                <button type="button" class="zoom-btn" @click="zoomOut">
+                  −
+                </button>
                 <span class="zoom-level">{{ Math.round(scale * 100) }}%</span>
-                <button type="button" class="zoom-btn" @click="zoomIn">+</button>
-                <button type="button" class="zoom-reset-btn" @click="resetZoom">
+                <button type="button" class="zoom-btn" @click="zoomIn">
+                  +
+                </button>
+                <button
+                  type="button"
+                  class="zoom-reset-btn"
+                  :disabled="!isZoomed"
+                  @click="resetZoom"
+                >
                   รีเซ็ต
                 </button>
               </div>
@@ -304,6 +315,7 @@ onBeforeUnmount(() => {
 
             <div
               class="modal-image-stage"
+              :class="{ zoomable: scale > 1, dragging: isDragging }"
               @wheel.prevent="handleWheel"
               @mousedown="startDrag"
               @dblclick="resetZoom"
@@ -312,7 +324,6 @@ onBeforeUnmount(() => {
                 :src="selectedImage"
                 alt="Preview"
                 class="modal-image"
-                :class="{ dragging: isDragging, zoomable: scale > 1 }"
                 :style="{ transform: imageTransform }"
                 draggable="false"
               />
@@ -334,7 +345,7 @@ onBeforeUnmount(() => {
   align-items: flex-start;
   gap: 16px;
   padding: 18px 20px;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -448,12 +459,15 @@ onBeforeUnmount(() => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.75);
   color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 10px;
+  line-height: 1;
 }
 
 /* modal */
@@ -537,6 +551,18 @@ onBeforeUnmount(() => {
   background: #eff6ff;
 }
 
+.zoom-reset-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.zoom-reset-btn:disabled:hover {
+  border-color: #e2e8f0;
+  background: #f1f5f9;
+}
+
 .zoom-level {
   min-width: 58px;
   text-align: center;
@@ -556,6 +582,15 @@ onBeforeUnmount(() => {
   background: #ffffff;
   border-radius: 14px;
   position: relative;
+  cursor: default;
+}
+
+.modal-image-stage.zoomable {
+  cursor: grab;
+}
+
+.modal-image-stage.dragging {
+  cursor: grabbing;
 }
 
 :global(.modal-image) {
@@ -564,19 +599,10 @@ onBeforeUnmount(() => {
   object-fit: contain;
   display: block;
   transform-origin: center center;
-  transition: transform 0.12s ease;
+  transition: none;
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
-}
-
-:global(.modal-image.zoomable) {
-  cursor: grab;
-}
-
-:global(.modal-image.dragging) {
-  cursor: grabbing;
-  transition: none;
 }
 
 :global(.close-btn) {
@@ -606,5 +632,12 @@ onBeforeUnmount(() => {
 .modal-fade-enter-from,
 .modal-fade-leave-to {
   opacity: 0;
+}
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
 }
 </style>

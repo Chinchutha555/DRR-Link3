@@ -104,4 +104,38 @@ onBeforeUnmount(() => {
   opacity: 1;
   transform: scale(1);
 }
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+}
+
+/* เพิ่ม depth แบบบางมาก */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.03),
+      transparent 120px
+    ),
+    radial-gradient(
+      800px 400px at 50% -100px,
+      rgba(37, 99, 235, 0.06),
+      transparent
+    );
+
+  z-index: -1;
+}
 </style>
