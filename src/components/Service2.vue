@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="untree_co-section bg-light">
+  <div class="untree_co-section bg-light" id="result-section">
     <div class="container">
       <div class="row justify-content-between">
         <!-- LEFT -->

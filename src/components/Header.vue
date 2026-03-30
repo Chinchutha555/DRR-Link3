@@ -30,7 +30,10 @@ import logo from "../assets/images/logo_DRR.svg";
           <li><a href="#features-section" class="nav-link">ที่มาและความสำคัญ</a></li>
            <li><a href="#objective-section" class="nav-link">วัตถุประสงค์</a></li>
           <li><a href="#pricing-section" class="nav-link">ความคืบหน้าโครงการ</a></li>
-          <li><a href="#about-section" class="nav-link">เกี่ยวกับ</a></li>
+          <li><a href="#result-section" class="nav-link">ผลการศึกษา</a></li>
+          <li><a href="#status-section" class="nav-link">สถานะการดำเนินงาน</a></li>
+          <li><a href="#file-section" class="nav-link">เอกสาร</a></li>
+          <li><a href="#new-section" class="nav-link">ข่าวประชาสัมพันธ์</a></li>
           <li><a href="#contact-section" class="nav-link">ติดต่อ</a></li>
         </ul>
         <!-- <ul

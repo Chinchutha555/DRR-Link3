@@ -52,7 +52,7 @@ const timelineItems = [
 </script>
 
 <template>
-  <section class="py-16 bg-white" style="margin-top: 100px">
+  <section class="py-16 bg-white" id="status-section" style="margin-top: 100px">
     <div class="max-w-6xl mx-auto px-6">
       <!-- Header -->
       <div

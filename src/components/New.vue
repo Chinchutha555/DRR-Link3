@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import { themeColor } from "../data/items";
 
-const heading = "ทั้งหมด";
+const heading = "ล่าสุด";
 const subHeading = "ข่าวประชาสัมพันธ์";
 
 const blogItems = [
@@ -250,8 +250,8 @@ const scrollToCurrent = () => {
               <button
                 @click="closeModal"
                 class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-lg transition border-0"
-                style="border-radius: 12px;"
-              >
+              style="border-radius: 12px;"
+                >
                 ✕
               </button>
 
@@ -261,7 +261,7 @@ const scrollToCurrent = () => {
                     :src="selectedItem.photo"
                     alt="Image"
                     class="rounded-circle border"
-                    style="width: 64px; height: 64px; object-fit: cover;"
+                    style="width: 64px; height: 64px; object-fit: cover"
                   />
                   <div class="ml-3">
                     <p class="mb-1 text-primary font-weight-bold">

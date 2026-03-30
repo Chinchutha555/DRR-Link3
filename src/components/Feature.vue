@@ -27,7 +27,7 @@ const items = [
 ];
 </script>
 <template>
-  <div class="untree_co-section" id="objective-section">
+  <div class="untree_co-section" id="objective-section" style="padding-bottom: 0;">
     <div class="container">
           <h3 class="heading text-center" data-aos="fade-up" data-aos-delay="100" style="margin-bottom: 60px;">
         วัตถุประสงค์

@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import { themeColor } from "../data/items";
 
-const heading = "ล่าสุด";
+const heading = "ทั้งหมด";
 const subHeading = "ข่าวประชาสัมพันธ์";
 
 const blogItems = [
@@ -110,7 +110,7 @@ const scrollToCurrent = () => {
 </script>
 
 <template>
-  <div class="untree_co-section news-section" id="testimonials-section">
+  <div class="untree_co-section news-section" id="new-section">
     <div class="container">
       <div class="row">
         <div class="col-12 mb-4" data-aos="fade-up" data-aos-delay="300">
@@ -250,6 +250,7 @@ const scrollToCurrent = () => {
               <button
                 @click="closeModal"
                 class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-lg transition border-0"
+                style="border-radius: 12px;"
               >
                 ✕
               </button>
@@ -260,7 +261,7 @@ const scrollToCurrent = () => {
                     :src="selectedItem.photo"
                     alt="Image"
                     class="rounded-circle border"
-                    style="width: 64px; height: 64px; object-fit: cover"
+                    style="width: 64px; height: 64px; object-fit: cover;"
                   />
                   <div class="ml-3">
                     <p class="mb-1 text-primary font-weight-bold">

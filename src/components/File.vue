@@ -21,7 +21,7 @@ const documents = [
 </script>
 
 <template>
-  <div class="untree_co-hero" id="#home-section">
+  <div class="untree_co-hero" id="file-section">
     <div class="container">
       <div class="col-12">
         <div class="row align-items-center">
