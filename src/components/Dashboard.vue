@@ -86,8 +86,8 @@ watch(selectedTab, async () => {
       </div>
 
             <!-- PROGRESS ROW: เต็มแถว -->
-      <div class="progress-row">
-        <div class="box progress-box" data-aos="fade-up" data-aos-delay="280">
+      <div class="progress-row" data-aos="fade-right">
+        <div class="box progress-box">
           <div class="progress-header">
             <h3>{{ dashboardData.progressLabel }}</h3>
             <span class="progress-percent">{{ dashboardData.progress }}%</span>
@@ -197,6 +197,13 @@ watch(selectedTab, async () => {
 .bottom-row {
   width: 100%;
   margin-bottom: 20px;
+
+   transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
 }
 
 .bottom-row .box {
@@ -207,6 +214,13 @@ watch(selectedTab, async () => {
 .progress-row {
   width: 100%;
   margin-bottom: 20px;
+
+   transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
 }
 
 .progress-row .box {
@@ -217,7 +231,13 @@ watch(selectedTab, async () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 170px;
+
+   transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
 }
 
 .stat-box h3,
