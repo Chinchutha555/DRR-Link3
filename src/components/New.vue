@@ -1,87 +1,97 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { themeColor } from "../data/items";
+import { newsItems } from "../data/news";
 
-const heading = "ล่าสุด";
-const subHeading = "ข่าวประชาสัมพันธ์";
+const props = defineProps({
+  heading: {
+    type: String,
+    default: "ล่าสุด",
+  },
+  subHeading: {
+    type: String,
+    default: "ข่าวประชาสัมพันธ์",
+  },
+  sectionId: {
+    type: String,
+    default: "news-section",
+  },
+  limit: {
+    type: Number,
+    default: null,
+  },
+});
 
-const blogItems = [
-  {
-    title: "การประชุมชี้แจงแผนงานโครงการ",
-    name: "ฝ่ายโครงการ",
-    date: "25 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_1.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 1 สามารถใส่ข้อความยาว ๆ ได้ที่นี่ เช่น วัน เวลา สถานที่ และสาระสำคัญของกิจกรรม",
-  },
-  {
-    title: "การลงพื้นที่สำรวจภาคสนาม",
-    name: "ฝ่ายสำรวจ",
-    date: "20 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_2.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 2 สำหรับแสดงใน popup เมื่อผู้ใช้คลิกที่กล่องข่าว",
-  },
-  {
-    title: "สรุปผลการประชุมรับฟังความคิดเห็น",
-    name: "ฝ่ายวิชาการ",
-    date: "15 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_3.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 3 พร้อมข้อมูลสรุปประเด็นสำคัญจากการประชุมรับฟังความคิดเห็น",
-  },
-  {
-    title: "กิจกรรมลงพื้นที่ติดตามความก้าวหน้า",
-    name: "ฝ่ายติดตาม",
-    date: "10 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_3.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 4 ใช้สำหรับทดสอบการเลื่อนการ์ดด้วยปุ่มซ้ายขวา",
-  },
-  {
-    title: "กิจกรรมลงพื้นที่ติดตามความก้าวหน้า",
-    name: "ฝ่ายติดตาม",
-    date: "10 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_3.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 4 ใช้สำหรับทดสอบการเลื่อนการ์ดด้วยปุ่มซ้ายขวา",
-  },
-  {
-    title: "กิจกรรมลงพื้นที่ติดตามความก้าวหน้า",
-    name: "ฝ่ายติดตาม",
-    date: "10 มี.ค. 2569",
-    category: "ข่าวประชาสัมพันธ์",
-    photo: "images/person_3.jpg",
-    detail:
-      "รายละเอียดเพิ่มเติมของข่าวประชาสัมพันธ์รายการที่ 4 ใช้สำหรับทดสอบการเลื่อนการ์ดด้วยปุ่มซ้ายขวา",
-  },
-];
+const formatThaiDate = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+
+  return date.toLocaleDateString("th-TH", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+const blogItems = computed(() => {
+  const sortedItems = [...newsItems]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map((item) => ({
+      ...item,
+      displayDate: formatThaiDate(item.date),
+    }));
+
+  return props.limit ? sortedItems.slice(0, props.limit) : sortedItems;
+});
 
 const showModal = ref(false);
 const selectedItem = ref(null);
+const selectedImage = ref(null);
+const fullscreenImage = ref(null);
 const slider = ref(null);
+
+const currentIndex = ref(0);
+const itemsPerPage = 3;
+
+const totalPages = computed(() =>
+  Math.ceil(blogItems.value.length / itemsPerPage),
+);
+
+const isAtStart = computed(() => currentIndex.value === 0);
+const isAtEnd = computed(() => currentIndex.value >= totalPages.value - 1);
 
 const openModal = (item) => {
   selectedItem.value = item;
+  selectedImage.value = item.photos?.[0] || null;
   showModal.value = true;
 };
 
 const closeModal = () => {
   showModal.value = false;
   selectedItem.value = null;
+  selectedImage.value = null;
+  fullscreenImage.value = null;
 };
 
-const currentIndex = ref(0);
-const itemsPerPage = 3;
+const openImageViewer = (img) => {
+  fullscreenImage.value = img;
+};
 
-const totalPages = computed(() => Math.ceil(blogItems.length / itemsPerPage));
-const isAtStart = computed(() => currentIndex.value === 0);
-const isAtEnd = computed(() => currentIndex.value === totalPages.value - 1);
+const closeImageViewer = () => {
+  fullscreenImage.value = null;
+};
+
+const scrollToCurrent = () => {
+  if (!slider.value) return;
+
+  const width = slider.value.clientWidth;
+  slider.value.scrollTo({
+    left: width * currentIndex.value,
+    behavior: "smooth",
+  });
+};
 
 const next = () => {
   if (isAtEnd.value) return;
@@ -100,17 +110,22 @@ const goTo = (index) => {
   scrollToCurrent();
 };
 
-const scrollToCurrent = () => {
-  const width = slider.value.clientWidth;
-  slider.value.scrollTo({
-    left: width * currentIndex.value,
-    behavior: "smooth",
-  });
-};
+watch([showModal, fullscreenImage], ([modal, image]) => {
+  if (modal || image) {
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = scrollBarWidth + "px";
+  } else {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  }
+});
 </script>
 
 <template>
-  <div class="untree_co-section news-section" id="testimonials-section">
+  <div class="untree_co-section news-section" :id="sectionId">
     <div class="container">
       <div class="row">
         <div class="col-12 mb-4" data-aos="fade-up" data-aos-delay="300">
@@ -122,7 +137,7 @@ const scrollToCurrent = () => {
               <h2 class="heading mb-0">{{ subHeading }}</h2>
             </div>
 
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" v-if="totalPages > 1">
               <a
                 href="#"
                 class="custom-prev"
@@ -186,19 +201,23 @@ const scrollToCurrent = () => {
           <div ref="slider" class="news-slider">
             <div
               v-for="(item, index) in blogItems"
-              :key="index"
+              :key="item.id ?? index"
               class="news-slide"
             >
               <article class="news-card" @click="openModal(item)">
                 <div class="news-card-media">
-                  <img :src="item.photo" alt="Image" class="news-card-image" />
+                  <img
+                    :src="item.photos?.[0] || 'images/default.jpg'"
+                    alt="Image"
+                    class="news-card-image"
+                  />
                 </div>
 
                 <div class="news-card-body">
                   <div class="news-meta">
                     <span class="news-badge">{{ item.category }}</span>
                     <span class="news-meta-dot">•</span>
-                    <span class="news-date">{{ item.date }}</span>
+                    <span class="news-date">{{ item.displayDate }}</span>
                   </div>
 
                   <h3 class="news-title">
@@ -218,9 +237,9 @@ const scrollToCurrent = () => {
             </div>
           </div>
 
-          <div class="dots">
+          <div class="dots" v-if="totalPages > 1">
             <span
-              v-for="(dot, index) in totalPages"
+              v-for="(_, index) in totalPages"
               :key="index"
               class="dot"
               :class="{ active: index === currentIndex }"
@@ -240,53 +259,100 @@ const scrollToCurrent = () => {
       >
         <div
           v-if="showModal"
-          class="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center px-4"
+          class="news-modal-overlay"
           @click.self="closeModal"
         >
-          <div
-            class="w-full max-w-2xl bg-white rounded-[28px] shadow-2xl overflow-hidden relative"
-          >
-            <div class="p-6 md:p-8">
-              <button
-                @click="closeModal"
-                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-lg transition border-0"
-              style="border-radius: 12px;"
-                >
-                ✕
-              </button>
+          <div class="news-modal">
+            <button
+              @click="closeModal"
+              class="news-modal-close"
+            >
+              ✕
+            </button>
 
-              <div v-if="selectedItem" class="pr-10">
-                <div class="d-flex align-items-center mb-4">
+            <div v-if="selectedItem" class="news-modal-content">
+              <div class="news-modal-hero">
+                <img
+                  :src="selectedImage || selectedItem.photos?.[0] || 'images/default.jpg'"
+                  alt="News image"
+                  class="news-modal-hero-image clickable-image"
+                  @click="openImageViewer(selectedImage || selectedItem.photos?.[0] || 'images/default.jpg')"
+                />
+              </div>
+
+              <div class="news-modal-body">
+                <div class="news-modal-meta-top">
+                  <span class="news-modal-badge">{{ selectedItem.category }}</span>
+                  <span class="news-modal-date">{{ selectedItem.displayDate }}</span>
+                </div>
+
+                <h1 class="news-modal-title">
+                  {{ selectedItem.title }}
+                </h1>
+
+                <div class="news-modal-author-row">
                   <img
-                    :src="selectedItem.photo"
-                    alt="Image"
-                    class="rounded-circle border"
-                    style="width: 64px; height: 64px; object-fit: cover"
+                    :src="selectedItem.photos?.[0] || 'images/default.jpg'"
+                    alt="Author"
+                    class="news-modal-author-image"
                   />
-                  <div class="ml-3">
-                    <p class="mb-1 text-primary font-weight-bold">
-                      {{ selectedItem.date }}
-                    </p>
-                    <h3 class="mb-1 font-weight-bold">
-                      {{ selectedItem.title }}
-                    </h3>
-                    <p class="mb-0 text-muted">
-                      {{ selectedItem.category }} | {{ selectedItem.name }}
-                    </p>
+                  <div>
+                    <div class="news-modal-author-label">เผยแพร่โดย</div>
+                    <div class="news-modal-author-name">{{ selectedItem.name }}</div>
                   </div>
                 </div>
 
-                <div class="mt-4">
-                  <p
-                    class="text-muted"
-                    style="line-height: 1.9; white-space: pre-line"
-                  >
-                    {{ selectedItem.detail }}
-                  </p>
+                <div
+                  v-if="selectedItem?.photos?.length > 1"
+                  class="news-modal-gallery"
+                >
+                  <img
+                    v-for="(img, imgIndex) in selectedItem.photos"
+                    :key="imgIndex"
+                    :src="img"
+                    alt="News image"
+                    class="news-modal-thumb"
+                    :class="{ active: selectedImage === img }"
+                    @click="selectedImage = img; openImageViewer(img)"
+                  />
+                </div>
+
+                <div class="news-modal-divider"></div>
+
+                <div class="news-modal-detail">
+                  {{ selectedItem.detail }}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </transition>
+
+      <transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="fullscreenImage"
+          class="image-viewer-overlay"
+          @click.self="closeImageViewer"
+        >
+          <button
+            class="image-viewer-close"
+            @click="closeImageViewer"
+          >
+            ✕
+          </button>
+
+          <img
+            :src="fullscreenImage"
+            alt="Fullscreen image"
+            class="image-viewer-image"
+          />
         </div>
       </transition>
     </div>
@@ -495,6 +561,224 @@ const scrollToCurrent = () => {
   cursor: not-allowed;
 }
 
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.news-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.news-modal {
+  width: 100%;
+  max-width: 920px;
+  max-height: 92vh;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.24);
+  position: relative;
+}
+
+.news-modal-content {
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.news-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.news-modal-close:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+}
+
+.news-modal-hero {
+  width: 100%;
+  height: 380px;
+  background: #e2e8f0;
+}
+
+.news-modal-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.news-modal-body {
+  padding: 28px 32px 32px;
+}
+
+.news-modal-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.news-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.news-modal-date {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.news-modal-title {
+  margin: 0 0 20px;
+  font-size: 34px;
+  line-height: 1.28;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.news-modal-author-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.news-modal-author-image {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.news-modal-author-label {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.news-modal-author-name {
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.news-modal-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 22px;
+}
+
+.news-modal-thumb {
+  width: 110px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 14px;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.news-modal-thumb:hover {
+  opacity: 0.5;
+}
+
+
+.news-modal-divider {
+  height: 1px;
+  background: linear-gradient(to right, #e2e8f0, transparent);
+  margin-bottom: 24px;
+}
+
+.news-modal-detail {
+  font-size: 17px;
+  line-height: 2;
+  color: #334155;
+  white-space: pre-line;
+}
+
+.clickable-image {
+  cursor: zoom-in;
+}
+
+.image-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.image-viewer-image {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.image-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.image-viewer-close:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 991px) {
   .news-slide {
     flex: 0 0 calc((100% - 28px) / 2);
@@ -527,12 +811,37 @@ const scrollToCurrent = () => {
   .news-detail {
     min-height: auto;
   }
-}
 
-button:focus,
-button:focus-visible,
-button:active {
-  outline: none;
-  box-shadow: none;
+  .news-modal-overlay {
+    padding: 14px;
+  }
+
+  .news-modal {
+    max-height: 95vh;
+    border-radius: 22px;
+  }
+
+  .news-modal-hero {
+    height: 240px;
+  }
+
+  .news-modal-body {
+    padding: 22px 18px 24px;
+  }
+
+  .news-modal-title {
+    font-size: 26px;
+    line-height: 1.35;
+  }
+
+  .news-modal-detail {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .news-modal-thumb {
+    width: 90px;
+    height: 72px;
+  }
 }
 </style>

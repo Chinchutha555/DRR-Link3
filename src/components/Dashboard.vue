@@ -7,20 +7,22 @@ const selectedTab = ref("phase1");
 const dashboardData = computed(() => {
   if (selectedTab.value === "phase2") {
     return {
-      routeCount: 28,
+      routeCount: 50,
       routeLabel: "สายทางในระยะ Phase 2",
-      distance: "1,245.80",
-      progress: 68,
+      distance: "2,500",
+      progress: 0,
       progressLabel: "ความคืบหน้า",
+      status: "กำลังดำเนินการ",
     };
   }
 
   return {
-    routeCount: 18,
+    routeCount: 40,
     routeLabel: "สายทางในระยะ Phase 1",
-    distance: "842.35",
-    progress: 42,
+    distance: "2,828.57",
+    progress: 100,
     progressLabel: "ความคืบหน้า",
+    status: "เสร็จสิ้น",
   };
 });
 
@@ -97,9 +99,21 @@ watch(selectedTab, async () => {
 
           <div class="single-progress-wrap">
             <div class="single-progress-top">
-              <span class="progress-phase">
-                {{ selectedTab === "phase1" ? "Phase 1" : "Phase 2" }}
-              </span>
+              <div class="progress-phase-row">
+                <span class="progress-phase">
+                  {{ selectedTab === "phase1" ? "Phase 1" : "Phase 2" }}
+                </span>
+
+                <span
+                  class="status-badge"
+                  :class="{
+                    success: dashboardData.status === 'เสร็จสิ้น',
+                    processing: dashboardData.status === 'กำลังดำเนินการ',
+                  }"
+                >
+                  {{ dashboardData.status }}
+                </span>
+              </div>
             </div>
 
             <div class="progress-bar">
@@ -376,4 +390,41 @@ button:active {
   outline: none;
   box-shadow: none;
 }
+
+.progress-phase-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* badge */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* เสร็จ */
+.status-badge.success {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* กำลังทำ */
+.status-badge.processing {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.progress-phase-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.status-badge {
+  margin-left: auto; /* ตัวนี้สำคัญ */
+}
+
 </style>

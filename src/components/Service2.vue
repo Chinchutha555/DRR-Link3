@@ -11,24 +11,24 @@ const themeColor = "#2563eb";
 const items = [
   {
     id: 1,
-    name: "ระยะสั้น",
-    des: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    name: "โครงการระยะสั้น (2 ปี)",
+    des: "มุ่งแก้ไขปัญหาเร่งด่วนและยกระดับสภาพถนนให้ใช้งานได้ปลอดภัยทันทีเน้นปรับปรุงจุดเสี่ยงและเพิ่มประสิทธิภาพการจราจรในระยะต้น",
     colorClass: "color-1",
     icon: "app-indicator",
     photo: short,
   },
   {
     id: 2,
-    name: "ระยะกลาง",
-    des: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    name: "โครงการระยะกลาง (5 ปี)",
+    des: "พัฒนาและเชื่อมโยงโครงข่ายถนนให้มีความต่อเนื่อง รองรับการเดินทางที่เพิ่มขึ้นเน้นเพิ่มขีดความสามารถของเส้นทางและสนับสนุนการพัฒนาเศรษฐกิจพื้นที่",
     colorClass: "color-2",
     icon: "arrow-repeat",
     photo: medium,
   },
   {
     id: 3,
-    name: "ระยะยาว",
-    des: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.",
+    name: "โครงการระยะยาว (10 ปี)",
+    des: "วางโครงสร้างพื้นฐานเชิงยุทธศาสตร์เพื่อรองรับการเติบโตในอนาคตอย่างยั่งยืนมุ่งสร้างโครงข่ายที่สมบูรณ์ เชื่อมโยงระดับภูมิภาค และเพิ่มศักยภาพการแข่งขันของพื้นที่",
     colorClass: "color-3",
     icon: "briefcase",
     photo: long,
@@ -160,104 +160,32 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="untree_co-section bg-light" id="result-section">
+  <div class="untree_co-section bg-light result-section" id="result-section">
     <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-lg-5 order-lg-2 js-custom-dots">
-          <div class="text-right" style="margin-bottom: 30px">
-            <span class="caption" :style="[{ color: themeColor }]">
+      <div class="row">
+        <div class="col-12">
+          <div class="result-header text-center">
+            <span class="caption result-caption" :style="[{ color: themeColor }]">
               {{ heading }}
             </span>
-            <h3 class="heading mb-0">{{ subHeading }}</h3>
+            <h3 class="heading mb-0 result-heading">{{ subHeading }}</h3>
+            <p class="result-description">
+              Factsheet เป็นเอกสารสรุปโครงการในรูปแบบย่อ ที่รวบรวมข้อมูลและแนวคิดเบื้องต้น
+              เพื่อให้ผู้ใช้งานสามารถเข้าใจภาพรวมของโครงการได้อย่างรวดเร็ว ชัดเจน
+              และนำไปใช้ต่อยอดในการพัฒนาโครงการในระยะถัดไป
+            </p>
+            <p class="result-description">
+              ข้อมูลสำคัญที่นำเสนอใน Factsheet ได้แก่ รายละเอียดภาพรวมของโครงการ
+              แนวเส้นทางและพื้นที่ดำเนินการ แนวคิดการออกแบบเบื้องต้น (Conceptual Design)
+              งบประมาณโครงการ ระยะเวลาดำเนินงาน และแปลนเขตทางที่เหมาะสม
+            </p>
           </div>
-
-          <a
-            v-for="(item, index) in items"
-            :key="item.id"
-            class="service link horizontal d-flex phase-card"
-            :class="{ active: index === 0 }"
-            data-aos="fade-left"
-          >
-            <div class="service-icon mb-4" :class="item.colorClass">
-              <svg
-                v-if="item.icon === 'app-indicator'"
-                class="bi bi-app-indicator"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"
-                />
-                <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-              </svg>
-
-              <svg
-                v-else-if="item.icon === 'arrow-repeat'"
-                class="bi bi-arrow-repeat"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z"
-                />
-              </svg>
-
-              <svg
-                v-else-if="item.icon === 'briefcase'"
-                class="bi bi-briefcase"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6h-1v6a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-6H0v6z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v2.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 6.884V4.5zM1.5 4a.5.5 0 0 0-.5.5v1.616l6.871 1.832a.5.5 0 0 0 .258 0L15 6.116V4.5a.5.5 0 0 0-.5-.5h-13zM5 2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z"
-                />
-              </svg>
-
-              <svg
-                v-else
-                class="bi bi-collection"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M14.5 13.5h-13A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5zm-13 1A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"
-                />
-              </svg>
-            </div>
-
-            <div class="service-contents">
-              <h3>{{ item.name }}</h3>
-              <p>{{ item.des }}</p>
-            </div>
-          </a>
         </div>
+      </div>
 
-        <div class="col-lg-7">
-          <div class="img-shadow rounded-xl">
+      <div class="row align-items-start result-body">
+        <div class="col-lg-7" data-aos="fade-right">
+          <div class="img-shadow rounded-xl result-image-wrap">
             <div class="owl-single no-dots owl-carousel">
               <div v-for="item in items" :key="item.id" class="item">
                 <span class="number">{{ item.id }}/{{ total }}</span>
@@ -269,6 +197,94 @@ onBeforeUnmount(() => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 js-custom-dots">
+          <div class="phase-card-list">
+            <a
+              v-for="(item, index) in items"
+              :key="item.id"
+              class="service link horizontal d-flex phase-card"
+              :class="{ active: index === 0 }"
+              data-aos="fade-left"
+            >
+              <div class="service-icon mb-4" :class="item.colorClass">
+                <svg
+                  v-if="item.icon === 'app-indicator'"
+                  class="bi bi-app-indicator"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"
+                  />
+                  <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                </svg>
+
+                <svg
+                  v-else-if="item.icon === 'arrow-repeat'"
+                  class="bi bi-arrow-repeat"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z"
+                  />
+                </svg>
+
+                <svg
+                  v-else-if="item.icon === 'briefcase'"
+                  class="bi bi-briefcase"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6h-1v6a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-6H0v6z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v2.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 6.884V4.5zM1.5 4a.5.5 0 0 0-.5.5v1.616l6.871 1.832a.5.5 0 0 0 .258 0L15 6.116V4.5a.5.5 0 0 0-.5-.5h-13zM5 2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z"
+                  />
+                </svg>
+
+                <svg
+                  v-else
+                  class="bi bi-collection"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.5 13.5h-13A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5zm-13 1A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"
+                  />
+                </svg>
+              </div>
+
+              <div class="service-contents">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.des }}</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -336,16 +352,64 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+.result-section {
+  padding: 80px 0;
+}
+
+.result-header {
+  max-width: 920px;
+  margin: 0 auto 40px;
+  padding-bottom: 24px;
+}
+
+.result-caption {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.result-heading {
+  font-size: 38px;
+  line-height: 1.2;
+  margin-bottom: 16px !important;
+  color: #0f172a;
+}
+
+.result-description {
+  margin: 0 auto;
+  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #64748b;
+}
+
+.result-body {
+  row-gap: 24px;
+}
+
+.result-image-wrap {
+  width: 100%;
+}
+
 .clickable-image {
   cursor: zoom-in;
 }
 
-/* ===== left cards ===== */
+.phase-card-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== cards ===== */
 .phase-card {
   align-items: flex-start;
   gap: 16px;
   padding: 18px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -425,6 +489,7 @@ onBeforeUnmount(() => {
   color: #ffffff;
 }
 
+/* ===== image ===== */
 .item {
   display: flex;
   align-items: center;
@@ -435,17 +500,17 @@ onBeforeUnmount(() => {
 .item img {
   display: block;
   margin: 0 auto;
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
 }
 
 .img-shadow {
-  padding: 24px 14px;
-}
-
-.img-shadow {
+  width: 100%;
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 22px;
-  padding: 14px;
+  padding: 18px;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
@@ -639,5 +704,81 @@ button:focus-visible,
 button:active {
   outline: none;
   box-shadow: none;
+}
+
+@media (max-width: 991.98px) {
+  .result-section {
+    padding: 64px 0;
+  }
+
+  .result-header {
+    margin-bottom: 32px;
+  }
+
+  .result-heading {
+    font-size: 30px;
+  }
+
+  .result-description {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .item {
+    min-height: 420px;
+  }
+
+  .item img {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .result-section {
+    padding: 50px 0;
+  }
+
+  .result-heading {
+    font-size: 26px;
+  }
+
+  .result-description {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .phase-card {
+    padding: 16px;
+  }
+
+  .phase-card .service-contents h3 {
+    font-size: 16px;
+  }
+
+  .phase-card .service-contents p {
+    font-size: 13px;
+  }
+
+  .img-shadow {
+    padding: 12px;
+  }
+
+  .item {
+    min-height: 320px;
+  }
+
+  .item img {
+    max-height: 300px;
+  }
+
+  :global(.image-modal) {
+    padding: 12px;
+  }
+
+  :global(.image-modal-content) {
+    width: 100%;
+    height: min(88vh, 760px);
+    padding: 16px;
+  }
 }
 </style>

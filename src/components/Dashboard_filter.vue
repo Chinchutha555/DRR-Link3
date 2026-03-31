@@ -1,10 +1,14 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 
+import phase1All from "../assets/images/Phase1_All.jpg";
 import phase1North from "../assets/images/North_Phase1.png";
 import phase1Northeast from "../assets/images/NorthEast_Phase1.png";
-import phase2North from "../assets/images/Phase2.png";
-import phase2Northeast from "../assets/images/Phase2.png";
+
+import phase2All from "../assets/images/Phase2.png";
+import phase2LowerNortheast from "../assets/images/Phase2.png";
+import phase2East from "../assets/images/Phase2.png";
+import phase2UpperCentral from "../assets/images/Phase2.png";
 
 const props = defineProps({
   phase: {
@@ -13,7 +17,7 @@ const props = defineProps({
   },
 });
 
-const selectedRegion = ref("north");
+const selectedRegion = ref("All");
 const isPreviewOpen = ref(false);
 
 const scale = ref(1);
@@ -30,30 +34,56 @@ const MIN_SCALE = 1;
 const MAX_SCALE = 5;
 const SCALE_STEP = 0.25;
 
-const regionOptions = [
-  { key: "north", label: "ภาคเหนือ" },
-  { key: "northeast", label: "ภาคอีสาน" },
-];
+const regionOptionsMap = {
+  phase1: [
+    { key: "All", label: "ทั้งหมด" },
+    { key: "north", label: "ภาคเหนือ" },
+    { key: "northeast", label: "ภาคอีสาน" },
+  ],
+  phase2: [
+    { key: "All", label: "ทั้งหมด" },
+    { key: "lowerNortheast", label: "ภาคอีสานตอนล่าง" },
+    { key: "east", label: "ภาคตะวันออก" },
+    { key: "upperCentral", label: "ภาคกลางตอนบน" },
+  ],
+};
 
 const regionNameMap = {
+  All: "ทั้งหมด",
+
+  // phase 1
   north: "ภาคเหนือ",
   northeast: "ภาคอีสาน",
+
+  // phase 2
+  lowerNortheast: "อีสานตอนล่าง",
+  east: "ตะวันออก",
+  upperCentral: "กลางตอนบน",
 };
 
 const phaseLabel = computed(() =>
   props.phase === "phase2" ? "Phase 2" : "Phase 1",
 );
 
-const regionLabel = computed(() => regionNameMap[selectedRegion.value]);
+const regionOptions = computed(() => {
+  return regionOptionsMap[props.phase] || [];
+});
+
+const regionLabel = computed(() => {
+  return regionNameMap[selectedRegion.value] || "ทั้งหมด";
+});
 
 const imageMap = {
   phase1: {
+    All: phase1All,
     north: phase1North,
     northeast: phase1Northeast,
   },
   phase2: {
-    north: phase2North,
-    northeast: phase2Northeast,
+    All: phase2All,
+    lowerNortheast: phase2LowerNortheast,
+    east: phase2East,
+    upperCentral: phase2UpperCentral,
   },
 };
 
@@ -65,10 +95,8 @@ const imageTransform = computed(() => {
   return `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`;
 });
 
-// ✅ เช็คว่า zoom อยู่ไหม
 const isZoomed = computed(() => scale.value > 1);
 
-// ✅ reset (มี validate)
 function resetZoom() {
   if (scale.value <= 1) return;
 
@@ -154,7 +182,7 @@ function handleKeydown(event) {
 watch(
   () => props.phase,
   () => {
-    selectedRegion.value = "north";
+    selectedRegion.value = "All";
     resetZoom();
   },
 );

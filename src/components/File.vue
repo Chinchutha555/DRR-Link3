@@ -2,11 +2,11 @@
 import mainPhoto from "../assets/images/file.png";
 const documents = [
   {
-    title: "Final Report",
+    title: "Final Report ระยะที่ 1",
     file: "https://infracorpth-my.sharepoint.com/:f:/g/personal/pawarotorn_c_infra-corp_co/IgC4v5-T-1iJTqIlllQ-Yqy5ASZ_k_KA9eGzlJ1XeYaEuBg?e=t0Ckdq",
   },
   {
-    title: "Fact Sheet",
+    title: "Fact Sheet ระยะที่ 1",
     file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQB4TiiP68p6QpKLVE30M3tTAW0xWVkWOwBUOzQBESoSj-E?e=HMEKnx",
   },
   {
@@ -14,7 +14,7 @@ const documents = [
     file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQBXCS6TAUTNSoNkVwGxjC61AfKqYNrmxfswb2xJEsxuELw?e=ywIhDS",
   },
   {
-    title: "งานวิจัยอาจารย์เจมส์",
+    title: "บทความที่ได้รับการตีพิมพ์",
     file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQCNMuKf66UtSbIb2jWy9MrHAWX9erowzuOeZqS5laGwHzk?e=D2Zmyc",
   },
 ];

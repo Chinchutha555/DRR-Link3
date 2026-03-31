@@ -7,9 +7,9 @@ import Service2 from "./components/Service2.vue";
 import Feature from "./components/Feature.vue";
 import Pricing from "./components/Pricing.vue";
 import Advantage from "./components/Advantage.vue";
-import Testimonial from "./components/New.vue";
+import News from "./components/New.vue";
 import About from "./components/About.vue";
-import Blog from "./components/New_all.vue";
+// import Blog from "./components/New_all.vue";
 import Contact from "./components/Contact.vue";
 import Footer from "./components/Footer.vue";
 import Customer from "./components/Customer.vue";
@@ -44,21 +44,24 @@ onBeforeUnmount(() => {
   <Header />
   <Banner />
   <Hero />
-  <Testimonial />
+  <News
+    heading="ล่าสุด"
+    subHeading="ข่าวประชาสัมพันธ์"
+    sectionId="testimonials-section"
+    :limit="6"
+  />
+
   <Service1 />
   <Feature />
   <Dashboard />
   <Service2 />
   <Status />
-  <File/>
-  <!-- <Map/> -->
-  <!-- <Pricing /> -->
-  <!-- <Advantage /> -->
-  <!-- <banner /> -->
-  <!-- <Testimonial /> -->
-  <!-- <Customer /> -->
-  <!-- <About /> -->
-  <Blog />
+  <File />
+  <News
+    heading="ทั้งหมด"
+    subHeading="ข่าวประชาสัมพันธ์"
+    sectionId="new-section"
+  />
   <Contact />
   <Footer />
 
@@ -125,11 +128,7 @@ body::before {
   pointer-events: none;
 
   background:
-    linear-gradient(
-      to bottom,
-      rgba(15, 23, 42, 0.03),
-      transparent 120px
-    ),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03), transparent 120px),
     radial-gradient(
       800px 400px at 50% -100px,
       rgba(37, 99, 235, 0.06),

@@ -61,7 +61,9 @@ const timelineItems = [
         data-aos-duration="900"
         data-aos-once="true"
       >
-        <h2 class="section-title">สถานะการดำเนินงานปัจจุบัน</h2>
+        <h2 class="section-title">
+          สถานะการดำเนินงานปัจจุบัน
+        </h2>
 
         <p class="section-desc max-w-2xl mx-auto leading-7">
           เรากำลังดำเนินการสำรวจภาคสนามและรับฟังความคิดเห็นจากทุกภาคส่วนอย่างเข้มข้น
@@ -113,14 +115,10 @@ const timelineItems = [
                   >
                     {{ item.status }}
                   </span>
-                  <span class="card-date text-xs text-slate-400">{{
-                    item.date
-                  }}</span>
+                  <span class="card-date text-xs text-slate-400">{{ item.date }}</span>
                 </div>
 
-                <h3
-                  class="card-title text-2xl font-extrabold text-slate-900 mb-3"
-                >
+                <h3 class="card-title text-2xl font-extrabold text-slate-900 mb-3">
                   {{ item.title }}
                 </h3>
                 <p class="card-desc text-sm leading-7 text-slate-500">
@@ -180,14 +178,10 @@ const timelineItems = [
                   >
                     {{ item.status }}
                   </span>
-                  <span class="card-date text-xs text-slate-400">{{
-                    item.date
-                  }}</span>
+                  <span class="card-date text-xs text-slate-400">{{ item.date }}</span>
                 </div>
 
-                <h3
-                  class="card-title text-2xl font-extrabold text-slate-900 mb-3"
-                >
+                <h3 class="card-title text-2xl font-extrabold text-slate-900 mb-3">
                   {{ item.title }}
                 </h3>
                 <p class="card-desc text-sm leading-7 text-slate-500">
@@ -206,9 +200,7 @@ const timelineItems = [
 <style scoped>
 /* ===== SECTION ===== */
 .section-title {
-  font-size: 38px;
   margin-bottom: 20px;
-  font-weight: 800;
   color: #0f172a;
   letter-spacing: -0.5px;
 }
@@ -221,7 +213,12 @@ const timelineItems = [
 
 /* ===== TIMELINE LINE ===== */
 .timeline-line {
-  background: linear-gradient(to bottom, #e2e8f0 0%, #cbd5f5 50%, #e2e8f0 100%);
+  background: linear-gradient(
+    to bottom,
+    #e2e8f0 0%,
+    #cbd5f5 50%,
+    #e2e8f0 100%
+  );
   opacity: 0.9;
 }
 
@@ -235,7 +232,7 @@ const timelineItems = [
 
   background: #ffffff;
 
-  box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
+     box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -248,7 +245,12 @@ const timelineItems = [
   position: absolute;
   inset: 0;
 
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8fafc 50%,
+    #f1f5f9 100%
+  );
 
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -271,7 +273,7 @@ const timelineItems = [
   box-shadow:
     0 12px 28px rgba(37, 99, 235, 0.12),
     0 0 0 1px rgba(147, 197, 253, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+    inset 0 1px 0 rgba(255,255,255,1);
 }
 
 /* ===== CONTENT ABOVE EFFECT ===== */
@@ -317,7 +319,7 @@ const timelineItems = [
 .timeline-dot-outer {
   box-shadow:
     0 6px 14px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 /* ===== MOBILE ===== */
