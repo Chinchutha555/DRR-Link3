@@ -1,6 +1,5 @@
 <script setup>
 import mainPhoto from "../assets/images/hero.svg";
-import { themeColor } from "../data/items";
 
 const heroHeading =
   "โครงการศึกษาและจัดทำแผนแม่บทการพัฒนาโครงข่ายสายรองที่สำคัญ";

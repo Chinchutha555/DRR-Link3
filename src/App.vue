@@ -10,7 +10,6 @@ import Advantage from "./components/Advantage.vue";
 import News from "./components/New.vue";
 import About from "./components/About.vue";
 // import Blog from "./components/New_all.vue";
-import Contact from "./components/Contact.vue";
 import Footer from "./components/Footer.vue";
 import Customer from "./components/Customer.vue";
 import banner from "./components/Content.vue";
@@ -62,7 +61,7 @@ onBeforeUnmount(() => {
     subHeading="ข่าวประชาสัมพันธ์"
     sectionId="new-section"
   />
-  <Contact />
+  <!-- <Contact /> -->
   <Footer />
 
   <h1></h1>

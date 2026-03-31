@@ -1,5 +1,4 @@
 <script setup>
-import { themeColor } from "../data/items";
 const heading = "Advantage of using our products";
 const subHeading = "Far from the countries Vokalia and Consonantia";
 const buttonLearnMore = "Learn More";

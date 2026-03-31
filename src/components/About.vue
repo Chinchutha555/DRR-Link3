@@ -1,5 +1,4 @@
 <script setup>
-import { themeColor } from "../data/items";
 import mainPhoto from "../assets/images/about.svg";
 
 const heading = "About";

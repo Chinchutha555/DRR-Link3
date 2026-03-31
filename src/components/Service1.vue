@@ -1,5 +1,4 @@
 <script setup>
-import { themeColor } from "../data/items";
 import personPhoto from "../assets/images/person_1.jpg";
 
 const service1Heading = "บทบาทของโครงข่ายถนนระดับที่ 3";

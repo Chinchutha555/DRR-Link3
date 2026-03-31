@@ -1,5 +1,4 @@
 <script setup>
-import { themeColor, siteName } from "../data/items";
 import logo from "../assets/images/logo_DRR.svg";
 </script>
 <template>

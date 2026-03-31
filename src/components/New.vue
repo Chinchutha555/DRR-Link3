@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, watch } from "vue";
-import { themeColor } from "../data/items";
 import { newsItems } from "../data/news";
 
 const props = defineProps({
@@ -229,7 +228,6 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
                   </p>
 
                   <div class="news-footer">
-                    <div class="news-author">โดย {{ item.name }}</div>
                     <span class="news-link">อ่านเพิ่มเติม →</span>
                   </div>
                 </div>
@@ -291,13 +289,8 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
                 </h1>
 
                 <div class="news-modal-author-row">
-                  <img
-                    :src="selectedItem.photos?.[0] || 'images/default.jpg'"
-                    alt="Author"
-                    class="news-modal-author-image"
-                  />
+             
                   <div>
-                    <div class="news-modal-author-label">เผยแพร่โดย</div>
                     <div class="news-modal-author-name">{{ selectedItem.name }}</div>
                   </div>
                 </div>
@@ -473,7 +466,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 56px;
+  min-height: 40px;
 }
 
 .news-detail {
@@ -491,8 +484,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 .news-footer {
   margin-top: auto;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end; /* 👈 ตัวนี้ */
   gap: 12px;
   padding-top: 6px;
 }

@@ -1,5 +1,4 @@
 <script setup>
-import { themeColor } from "../data/items";
 const heading = "Pricing";
 const subHeading = "Pricing for everyone. Choose your plan now!";
 const startButtonName = "Get Started";

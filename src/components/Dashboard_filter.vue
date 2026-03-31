@@ -38,7 +38,7 @@ const regionOptionsMap = {
   phase1: [
     { key: "All", label: "ทั้งหมด" },
     { key: "north", label: "ภาคเหนือ" },
-    { key: "northeast", label: "ภาคอีสาน" },
+    { key: "northeast", label: "ภาคอีสานตอนบน" },
   ],
   phase2: [
     { key: "All", label: "ทั้งหมด" },
