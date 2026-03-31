@@ -1,21 +1,22 @@
 <script setup>
-import mainPhoto from "../assets/images/file.png";
+import mainPhoto from "../assets/images/document.png";
 const documents = [
   {
     title: "Final Report ระยะที่ 1",
-    file: "https://infracorpth-my.sharepoint.com/:f:/g/personal/pawarotorn_c_infra-corp_co/IgC4v5-T-1iJTqIlllQ-Yqy5ASZ_k_KA9eGzlJ1XeYaEuBg?e=t0Ckdq",
+    file:"https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQCNMuKf66UtSbIb2jWy9MrHAWX9erowzuOeZqS5laGwHzk?e=D2Zmyc"
   },
   {
     title: "Fact Sheet ระยะที่ 1",
-    file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQB4TiiP68p6QpKLVE30M3tTAW0xWVkWOwBUOzQBESoSj-E?e=HMEKnx",
+    file: "https://infracorpth-my.sharepoint.com/:f:/g/personal/pawarotorn_c_infra-corp_co/IgCJEI-bQke5QpQSXFWXaidtAfe2IcMw-Q-olYjjnTAcYIQ?e=PCly9n"
+
   },
   {
     title: "Definitive Conceptual Design",
-    file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQBXCS6TAUTNSoNkVwGxjC61AfKqYNrmxfswb2xJEsxuELw?e=ywIhDS",
+    file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQB4TiiP68p6QpKLVE30M3tTAW0xWVkWOwBUOzQBESoSj-E?e=HMEKnx",
   },
   {
     title: "บทความที่ได้รับการตีพิมพ์",
-    file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQCNMuKf66UtSbIb2jWy9MrHAWX9erowzuOeZqS5laGwHzk?e=D2Zmyc",
+    file: "https://infracorpth-my.sharepoint.com/:b:/g/personal/pawarotorn_c_infra-corp_co/IQBXCS6TAUTNSoNkVwGxjC61AfKqYNrmxfswb2xJEsxuELw?e=ywIhDS",
   },
 ];
 </script>
@@ -172,7 +173,7 @@ const documents = [
   background: #ffffff;
   text-decoration: none;
 
- transition:
+  transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
