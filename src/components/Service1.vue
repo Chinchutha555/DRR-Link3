@@ -1,6 +1,4 @@
 <script setup>
-import personPhoto from "../assets/images/person_1.jpg";
-
 const service1Heading = "บทบาทของโครงข่ายถนนระดับที่ 3";
 const service1SubHeading = "ที่มาและความสำคัญ";
 const service1Quote =
@@ -33,8 +31,8 @@ function youtubeVideoUrl() {
               โดยเฉพาะ โครงข่ายถนนระดับที่ 3 ซึ่งมีความสำคัญอย่างยิ่งในฐานะ
               “โครงข่ายสายรองที่เชื่อมโยงพื้นที่สำคัญในระดับจังหวัด”
             </p>
-<hr>
-<br>
+            <hr />
+            <br />
             <span
               class="caption mb-4"
               data-aos="fade-up"
@@ -69,9 +67,45 @@ function youtubeVideoUrl() {
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          <img src="../assets/images/Seminar.png" alt="Image" class="img-fluid" />
+          <img
+            src="../assets/images/meeting.jpg"
+            alt="Image"
+            class="img-fluid feature-image"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scope>
+.feature-image {
+  width: 100%;
+  max-width: 480px;
+
+  border-radius: 24px;
+  padding: 14px;
+  background: #ffffff;
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.08),
+    0 24px 50px rgba(37, 99, 235, 0.08);
+
+  display: block;
+}
+
+/* hover subtle แบบเดียวกับ card */
+.feature-image:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.12),
+    0 30px 60px rgba(37, 99, 235, 0.12);
+  transition: 0.25s ease;
+}
+
+.col-lg-6:last-child {
+  padding-right: 0;
+}
+</style>

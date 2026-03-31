@@ -38,7 +38,7 @@ const mapEmbedUrl ="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.6
 </script>
 
 <template>
-  <div class="site-footer">
+  <div class="site-footer" id="contact-section">
     <div class="footer-main-layout">
       <!-- LEFT : MAP -->
       <div class="footer-map-col">

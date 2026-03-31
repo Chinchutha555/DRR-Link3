@@ -1,5 +1,5 @@
 <script setup>
-import mainPhoto from "../assets/images/hero.svg";
+import mainPhoto from "../assets/images/car.png";
 
 const heroHeading =
   "โครงการศึกษาและจัดทำแผนแม่บทการพัฒนาโครงข่ายสายรองที่สำคัญ";
@@ -12,14 +12,14 @@ const buttonPricing = "Pricing";
     <div class="container">
       <div class="row align-items-center" style="padding-bottom: 0">
         <div class="col-12">
-          <div class="dots"></div>
+          <!-- <div class="dots"></div> -->
           <div class="row align-items-center">
             <div
               class="col-lg-7 ml-auto order-lg-2"
-              data-aos="fade-right"
+              data-aos="fade-left"
               data-aos-delay="400"
             >
-              <img :src="mainPhoto" alt="Image" class="img-fluid" />
+              <img :src="mainPhoto" alt="Image" class="img-fluid flip-image" />
             </div>
             <div class="col-lg-5">
               <h1
@@ -59,4 +59,6 @@ const buttonPricing = "Pricing";
 .pricing:hover {
   color: #fff !important;
 }
+
+
 </style>
