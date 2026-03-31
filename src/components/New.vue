@@ -61,6 +61,8 @@ const totalPages = computed(() =>
 const isAtStart = computed(() => currentIndex.value === 0);
 const isAtEnd = computed(() => currentIndex.value >= totalPages.value - 1);
 
+const itemsCount = computed(() => blogItems.value.length);
+
 const openModal = (item) => {
   selectedItem.value = item;
   selectedImage.value = item.photos?.[0] || null;
@@ -197,7 +199,14 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 
       <div class="row">
         <div class="col-12" data-aos="fade-up" data-aos-delay="500">
-          <div ref="slider" class="news-slider">
+          <div
+            ref="slider"
+            class="news-slider"
+            :class="{
+              'one-item': itemsCount === 1,
+              'two-items': itemsCount === 2
+            }"
+          >
             <div
               v-for="(item, index) in blogItems"
               :key="item.id ?? index"
@@ -289,7 +298,6 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
                 </h1>
 
                 <div class="news-modal-author-row">
-             
                   <div>
                     <div class="news-modal-author-name">{{ selectedItem.name }}</div>
                   </div>
@@ -382,6 +390,25 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 .news-slide {
   flex: 0 0 calc((100% - 56px) / 3);
   display: flex;
+}
+
+/* 1 ข่าว */
+.news-slider.one-item {
+  justify-content: center;
+}
+
+.news-slider.one-item .news-slide {
+  flex: 0 0 min(100%, 520px);
+}
+
+/* 2 ข่าว */
+.news-slider.two-items {
+  justify-content: center;
+}
+
+.news-slider.two-items .news-slide {
+  flex: 0 0 calc((100% - 28px) / 2);
+  max-width: 520px;
 }
 
 .news-card {
@@ -484,7 +511,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 .news-footer {
   margin-top: auto;
   display: flex;
-  justify-content: flex-end; /* 👈 ตัวนี้ */
+  justify-content: flex-end;
   gap: 12px;
   padding-top: 6px;
 }
@@ -712,7 +739,6 @@ button:active {
   opacity: 0.5;
 }
 
-
 .news-modal-divider {
   height: 1px;
   background: linear-gradient(to right, #e2e8f0, transparent);
@@ -772,8 +798,14 @@ button:active {
 }
 
 @media (max-width: 991px) {
-  .news-slide {
+  .news-slide,
+  .news-slider.two-items .news-slide {
     flex: 0 0 calc((100% - 28px) / 2);
+    max-width: none;
+  }
+
+  .news-slider.one-item .news-slide {
+    flex: 0 0 min(100%, 520px);
   }
 
   .news-card-image {
@@ -787,8 +819,11 @@ button:active {
     flex-direction: column;
   }
 
-  .news-slide {
+  .news-slide,
+  .news-slider.one-item .news-slide,
+  .news-slider.two-items .news-slide {
     flex: 0 0 100%;
+    max-width: none;
   }
 
   .news-card-image {
