@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from "vue";
-import ProjectMap from "../components/Dashboard_filter.vue";
+import ProjectMap from "../components/Map.vue";
 
 const selectedTab = ref("phase1");
 

@@ -17,6 +17,7 @@ import Dashboard from "./components/Dashboard.vue";
 import Status from "./components/Status.vue";
 import File from "./components/File.vue";
 import Section from "./components/Section.vue";
+import Map from "./components/Map.vue"
 
 const showButton = ref(false);
 
@@ -51,6 +52,8 @@ onBeforeUnmount(() => {
     sectionId="testimonials-section"
     :limit="6"
   />
+
+  <!-- <Map/> -->
 
   <Service1 />
   <Feature />
