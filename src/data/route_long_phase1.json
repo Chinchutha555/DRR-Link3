@@ -1,6 +1,6 @@
 {
     "type": "FeatureCollection",
-    "name": "route_long_list_phase1",
+    "name": "route_long_list_phase1_region",
     "crs": {
         "type": "name",
         "properties": {
@@ -36,7 +36,8 @@
                 "st_length_": 36.37217931032,
                 "Plan": 18.0,
                 "Date": "1_18",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -526,7 +527,8 @@
                 "st_length_": 55.253346772610001,
                 "Plan": 20.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1244,7 +1246,8 @@
                 "st_length_": 5.3202607477399999,
                 "Plan": 36.0,
                 "Date": "1_36",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1394,7 +1397,8 @@
                 "st_length_": 19.745572738669999,
                 "Plan": 19.0,
                 "Date": "1_18",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1588,7 +1592,8 @@
                 "st_length_": 30.866972082829999,
                 "Plan": 35.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": null
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1623,7 +1628,8 @@
                 "st_length_": 22.045792012780002,
                 "Plan": 37.0,
                 "Date": "1_36",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1861,7 +1867,8 @@
                 "st_length_": 17.48393916254,
                 "Plan": 37.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1955,7 +1962,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -2057,7 +2065,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -2283,7 +2292,8 @@
                 "st_length_": 19.648521296639998,
                 "Plan": 24.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -2357,7 +2367,8 @@
                 "st_length_": 48.755243490920002,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -2843,7 +2854,8 @@
                 "st_length_": 72.697199748909995,
                 "Plan": 18.0,
                 "Date": "1_18",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -3505,7 +3517,8 @@
                 "st_length_": 42.598867386599998,
                 "Plan": 15.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -3579,7 +3592,8 @@
                 "st_length_": 60.079358878960001,
                 "Plan": 26.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4253,7 +4267,8 @@
                 "st_length_": 40.508689569410002,
                 "Plan": 28.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5319,7 +5334,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5469,7 +5485,8 @@
                 "st_length_": 77.989920230370004,
                 "Plan": 30.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5727,7 +5744,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5845,7 +5863,8 @@
                 "st_length_": 14.41441587109,
                 "Plan": 25.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6051,7 +6070,8 @@
                 "st_length_": 23.86957163916,
                 "Plan": 14.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6333,7 +6353,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6655,7 +6676,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6765,7 +6787,8 @@
                 "st_length_": 18.81405756457,
                 "Plan": 4.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6851,7 +6874,8 @@
                 "st_length_": 20.6312996037,
                 "Plan": 7.0,
                 "Date": "1_7",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -7057,7 +7081,8 @@
                 "st_length_": 118.38279632823,
                 "Plan": 5.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -8047,7 +8072,8 @@
                 "st_length_": 49.913641598570003,
                 "Plan": 10.0,
                 "Date": "1_10",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -8945,7 +8971,8 @@
                 "st_length_": 93.054076925190003,
                 "Plan": 12.0,
                 "Date": "1_12",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -9667,7 +9694,8 @@
                 "st_length_": 70.106373926930004,
                 "Plan": 9.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -10537,7 +10565,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -10771,7 +10800,8 @@
                 "st_length_": 74.222609967470007,
                 "Plan": 3.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -12929,7 +12959,8 @@
                 "st_length_": 0.38626993358,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -13519,7 +13550,8 @@
                 "st_length_": 1.6247078687000001,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": null
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -13554,7 +13586,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -14328,7 +14361,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -14526,7 +14560,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -14680,7 +14715,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -15222,7 +15258,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -16400,7 +16437,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -16962,7 +17000,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -18604,7 +18643,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19278,7 +19318,8 @@
                 "st_length_": null,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19564,7 +19605,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19610,7 +19652,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19696,7 +19739,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19918,7 +19962,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -19988,7 +20033,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20106,7 +20152,8 @@
                 "st_length_": 17.48393916254,
                 "Plan": 37.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20304,7 +20351,8 @@
                 "st_length_": 17.48393916254,
                 "Plan": 37.0,
                 "Date": "1",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20362,7 +20410,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20504,7 +20553,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20550,7 +20600,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20664,7 +20715,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20714,7 +20766,8 @@
                 "st_length_": 19.745572738669999,
                 "Plan": 19.0,
                 "Date": "1_18",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -20936,7 +20989,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21006,7 +21060,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21100,7 +21155,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21170,7 +21226,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21420,7 +21477,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21538,7 +21596,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21608,7 +21667,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21818,7 +21878,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -21872,7 +21933,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -22494,7 +22556,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -22540,7 +22603,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -22878,7 +22942,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23292,7 +23357,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23374,7 +23440,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23508,7 +23575,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23586,7 +23654,8 @@
                 "st_length_": 60.079358878960001,
                 "Plan": 26.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23800,7 +23869,8 @@
                 "st_length_": 60.079358878960001,
                 "Plan": 26.0,
                 "Date": "1",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -23854,7 +23924,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -24036,7 +24107,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -24746,7 +24818,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -24868,7 +24941,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -24982,7 +25056,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25084,7 +25159,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25518,7 +25594,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25676,7 +25753,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25722,7 +25800,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25784,7 +25863,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25886,7 +25966,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": null
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25921,7 +26002,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": null
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25956,7 +26038,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": null
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -25991,7 +26074,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -26273,7 +26357,8 @@
                 "st_length_": 0.77324523693000002,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -27003,7 +27088,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -27065,7 +27151,8 @@
                 "st_length_": 1.6247078687000001,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -28475,7 +28562,8 @@
                 "st_length_": 0.27525985402000003,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -29517,7 +29605,8 @@
                 "st_length_": 0.06884390465,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -29747,7 +29836,8 @@
                 "st_length_": 0.1153176156,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -30177,7 +30267,8 @@
                 "st_length_": 0.05442068157,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -30487,7 +30578,8 @@
                 "st_length_": 0.11684298974,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -31373,7 +31465,8 @@
                 "st_length_": 0.03986169701,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -31751,7 +31844,8 @@
                 "st_length_": 0.27525985402000003,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -32793,7 +32887,8 @@
                 "st_length_": 0.06884390465,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -33023,7 +33118,8 @@
                 "st_length_": 0.1153176156,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -33453,7 +33549,8 @@
                 "st_length_": 0.05442068157,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -33763,7 +33860,8 @@
                 "st_length_": 0.11684298974,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -34649,7 +34747,8 @@
                 "st_length_": 0.03986169701,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -35027,7 +35126,8 @@
                 "st_length_": 0.27525985402000003,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -36069,7 +36169,8 @@
                 "st_length_": 0.06884390465,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -36299,7 +36400,8 @@
                 "st_length_": 0.1153176156,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -36729,7 +36831,8 @@
                 "st_length_": 0.05442068157,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -37039,7 +37142,8 @@
                 "st_length_": 0.11684298974,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -37925,7 +38029,8 @@
                 "st_length_": 0.03986169701,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -38303,7 +38408,8 @@
                 "st_length_": 0.27525985402000003,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -39345,7 +39451,8 @@
                 "st_length_": 0.06884390465,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -39575,7 +39682,8 @@
                 "st_length_": 0.1153176156,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -40005,7 +40113,8 @@
                 "st_length_": 0.05442068157,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -40315,7 +40424,8 @@
                 "st_length_": 0.11684298974,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -41201,7 +41311,8 @@
                 "st_length_": 0.03986169701,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -41579,7 +41690,8 @@
                 "st_length_": 0.21806172677,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -42237,7 +42349,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43347,7 +43460,8 @@
                 "st_length_": 19.648521296639998,
                 "Plan": 24.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43445,7 +43559,8 @@
                 "st_length_": 19.648521296639998,
                 "Plan": 24.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43671,7 +43786,8 @@
                 "st_length_": 19.648521296639998,
                 "Plan": 24.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43765,7 +43881,8 @@
                 "st_length_": 19.648521296639998,
                 "Plan": 24.0,
                 "Date": "1_24",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43819,7 +43936,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -43981,7 +44099,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44223,7 +44342,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44277,7 +44397,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44595,7 +44716,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44781,7 +44903,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44871,7 +44994,8 @@
                 "st_length_": 60.507562037269999,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -44937,7 +45061,8 @@
                 "st_length_": 48.755243490920002,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45083,7 +45208,8 @@
                 "st_length_": 48.755243490920002,
                 "Plan": 23.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45277,7 +45403,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45451,7 +45578,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45517,7 +45645,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45595,7 +45724,8 @@
                 "st_length_": 135.01209064443,
                 "Plan": 27.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45653,7 +45783,8 @@
                 "st_length_": 18.81405756457,
                 "Plan": 4.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -45771,7 +45902,8 @@
                 "st_length_": 18.81405756457,
                 "Plan": 4.0,
                 "Date": "1",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -46149,7 +46281,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -46823,7 +46956,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -46873,7 +47007,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -46927,7 +47062,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -46997,7 +47133,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47119,7 +47256,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47253,7 +47391,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47303,7 +47442,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47397,7 +47537,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47783,7 +47924,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -47913,7 +48055,8 @@
                 "st_length_": 42.598867386599998,
                 "Plan": 15.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48351,7 +48494,8 @@
                 "st_length_": 42.598867386599998,
                 "Plan": 15.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48405,7 +48549,8 @@
                 "st_length_": 42.598867386599998,
                 "Plan": 15.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48471,7 +48616,8 @@
                 "st_length_": 23.86957163916,
                 "Plan": 14.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48581,7 +48727,8 @@
                 "st_length_": 23.86957163916,
                 "Plan": 14.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48663,7 +48810,8 @@
                 "st_length_": 23.86957163916,
                 "Plan": 14.0,
                 "Date": "1_14",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48733,7 +48881,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48791,7 +48940,8 @@
                 "st_length_": 241.15016777583,
                 "Plan": 1.0,
                 "Date": "2",
-                "examine": null
+                "examine": null,
+                "region": "ภาคเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -48905,7 +49055,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -49083,7 +49234,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50197,7 +50349,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50267,7 +50420,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50325,7 +50479,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50391,7 +50546,8 @@
                 "st_length_": 0.73615620403000004,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50461,7 +50617,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50827,7 +50984,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50885,7 +51043,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -50935,7 +51094,8 @@
                 "st_length_": 0.68309950533999997,
                 "Plan": null,
                 "Date": null,
-                "examine": null
+                "examine": null,
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51089,7 +51249,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51175,7 +51336,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51301,7 +51463,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51399,7 +51562,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51489,7 +51653,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -51935,7 +52100,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52073,7 +52239,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52131,7 +52298,8 @@
                 "st_length_": 0.94856177011999998,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52277,7 +52445,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52351,7 +52520,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52461,7 +52631,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52667,7 +52838,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52725,7 +52897,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -52991,7 +53164,8 @@
                 "st_length_": 1.2117411950100001,
                 "Plan": null,
                 "Date": null,
-                "examine": "no"
+                "examine": "no",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54105,7 +54279,8 @@
                 "st_length_": 77.989920230370004,
                 "Plan": 30.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54179,7 +54354,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54233,7 +54409,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54319,7 +54496,8 @@
                 "st_length_": 77.989920230370004,
                 "Plan": 30.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54505,7 +54683,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -54735,7 +54914,8 @@
                 "st_length_": 59.280162387030003,
                 "Plan": 31.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55013,7 +55193,8 @@
                 "st_length_": 77.989920230370004,
                 "Plan": 30.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55195,7 +55376,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55281,7 +55463,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55471,7 +55654,8 @@
                 "st_length_": 204.91658937675999,
                 "Plan": 29.0,
                 "Date": "2",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55821,7 +56005,8 @@
                 "st_length_": 77.989920230370004,
                 "Plan": 30.0,
                 "Date": "1_30",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -55983,7 +56168,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -56117,7 +56303,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -56163,7 +56350,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -56273,7 +56461,8 @@
                 "st_length_": 24.768642042140002,
                 "Plan": 32.0,
                 "Date": "1_32",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -56471,7 +56660,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -56737,7 +56927,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57035,7 +57226,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57093,7 +57285,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57175,7 +57368,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57425,7 +57619,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57591,7 +57786,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57653,7 +57849,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57751,7 +57948,8 @@
                 "st_length_": 0.87666654974000002,
                 "Plan": null,
                 "Date": null,
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57797,7 +57995,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -57911,7 +58110,8 @@
                 "st_length_": 90.94380133704,
                 "Plan": 22.0,
                 "Date": "1",
-                "examine": "yes"
+                "examine": "yes",
+                "region": "ภาคตะวันออกเฉียงเหนือ"
             },
             "geometry": {
                 "type": "MultiLineString",

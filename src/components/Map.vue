@@ -50,11 +50,11 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, computed, onMounted } from "vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
-import routesData from "../data/route_long_list_phase1.json";  // ใช้ไฟล์ GeoJSON ที่คุณให้มา
+import routesData from "../data/route_long_phase1.json";  // ใช้ไฟล์ GeoJSON ที่คุณให้มา
 
 const mapRef = ref(null);
 const mapInstance = ref(null);
@@ -96,9 +96,69 @@ function styleGeoJson(feature) {
   };
 }
 
+// ฟังก์ชันที่จะคำนวณตำแหน่งกลางของเส้นทาง
+function getLineCenter(coordinates) {
+  if (!coordinates || coordinates.length === 0) {
+    return [0, 0];  // หรือคืนค่า null หากไม่มีข้อมูล
+  }
+
+  let latSum = 0, lonSum = 0;
+  coordinates.forEach(coord => {
+    latSum += coord[1];
+    lonSum += coord[0];
+  });
+  return [latSum / coordinates.length, lonSum / coordinates.length];
+}
+
+// เพิ่ม tooltip หรือข้อความที่จุดกลางของเส้นทาง
+function addTooltipToLine(map, feature) {
+  const coordinates = feature.geometry.coordinates[0]; // Assuming this is a MultiLineString
+  const field2Value = feature.properties.field_2;
+
+  // คำนวณตำแหน่งกลางของเส้นทาง
+  const [centerLat, centerLon] = getLineCenter(coordinates);
+
+  // เพิ่ม tooltip ที่ตำแหน่งกลางของเส้นทาง
+  L.tooltip({
+    permanent: true,
+    direction: 'top', // ปรับตำแหน่งของ tooltip
+    offset: [0, -10] // ปรับระยะห่าง
+  })
+    .setLatLng([centerLat, centerLon])  // ใช้ตำแหน่งกลางที่คำนวณได้
+    .setContent(`Field 2: ${field2Value}`)
+    .addTo(map);
+}
+
+// ขยายขอบเขตแผนที่ให้ครอบคลุมเส้นทางทั้งหมด
+function fitMapBounds(map) {
+  const bounds = L.latLngBounds(); // สร้าง bounds ที่ใช้ขยายขอบเขต
+
+  geoJsonCollection.value.features.forEach((feature) => {
+    const coordinates = feature.geometry.coordinates[0];
+
+    // ตรวจสอบว่า coordinates มีข้อมูลก่อนที่จะใช้ forEach
+    if (coordinates && coordinates.length > 0) {
+      coordinates.forEach((coord) => {
+        bounds.extend([coord[1], coord[0]]); // ขยายขอบเขตด้วยพิกัดทั้งหมด
+      });
+    }
+  });
+
+  map.fitBounds(bounds, { padding: [20, 20] }); // เพิ่ม padding เพื่อให้แผนที่ไม่ติดขอบ
+}
+
 function onMapReady(map) {
   mapInstance.value = map;
-  mapInstance.value.invalidateSize();
+
+  // วนลูปเพิ่ม tooltip ที่ตำแหน่งกลางของเส้นทาง
+  geoJsonCollection.value.features.forEach((feature) => {
+    addTooltipToLine(map, feature);
+  });
+
+  // ขยายขอบเขตแผนที่ให้ครอบคลุมทุกเส้นทาง
+  fitMapBounds(map);
+
+  mapInstance.value.invalidateSize(); // ปรับขนาดแผนที่ใหม่
 }
 
 onMounted(() => {
