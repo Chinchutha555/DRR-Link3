@@ -109,7 +109,7 @@ const documents = [
   border-radius: 28px;
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 24px 24px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 2px 24px rgba(37, 99, 235, 0.12);
     transform: translateX(-80px);
 }
 
@@ -129,7 +129,7 @@ const documents = [
   border-radius: 24px;
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 24px 24px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 2px 24px rgba(37, 99, 235, 0.12);
   transform: translateX(-50px);
 }
 

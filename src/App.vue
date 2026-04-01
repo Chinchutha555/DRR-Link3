@@ -16,6 +16,7 @@ import banner from "./components/Content.vue";
 import Dashboard from "./components/Dashboard.vue";
 import Status from "./components/Status.vue";
 import File from "./components/File.vue";
+import Section from "./components/Section.vue";
 
 const showButton = ref(false);
 
@@ -43,6 +44,7 @@ onBeforeUnmount(() => {
   <Header />
   <Banner />
   <Hero />
+  <Section/>
   <News
     heading="ล่าสุด"
     subHeading="ข่าวประชาสัมพันธ์"

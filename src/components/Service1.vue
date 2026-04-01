@@ -79,30 +79,12 @@ function youtubeVideoUrl() {
 </template>
 
 <style scope>
-.feature-image {
-  width: 100%;
-  max-width: 480px;
-
-  border-radius: 24px;
-  padding: 14px;
+.img-fluid.feature-image {
+  padding: 18px;
+  border-radius: 28px;
   background: #ffffff;
-
   border: 1px solid rgba(148, 163, 184, 0.18);
-
-  box-shadow:
-    0 10px 25px rgba(15, 23, 42, 0.08),
-    0 24px 50px rgba(37, 99, 235, 0.08);
-
-  display: block;
-}
-
-/* hover subtle แบบเดียวกับ card */
-.feature-image:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 14px 30px rgba(15, 23, 42, 0.12),
-    0 30px 60px rgba(37, 99, 235, 0.12);
-  transition: 0.25s ease;
+  box-shadow: 0 2px 24px rgba(37, 99, 235, 0.12);
 }
 
 .col-lg-6:last-child {

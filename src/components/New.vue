@@ -48,6 +48,7 @@ const blogItems = computed(() => {
 const showModal = ref(false);
 const selectedItem = ref(null);
 const selectedImage = ref(null);
+const selectedImageIndex = ref(0);
 const fullscreenImage = ref(null);
 const slider = ref(null);
 
@@ -65,6 +66,7 @@ const itemsCount = computed(() => blogItems.value.length);
 
 const openModal = (item) => {
   selectedItem.value = item;
+  selectedImageIndex.value = 0;
   selectedImage.value = item.photos?.[0] || null;
   showModal.value = true;
 };
@@ -73,6 +75,7 @@ const closeModal = () => {
   showModal.value = false;
   selectedItem.value = null;
   selectedImage.value = null;
+  selectedImageIndex.value = 0;
   fullscreenImage.value = null;
 };
 
@@ -82,6 +85,27 @@ const openImageViewer = (img) => {
 
 const closeImageViewer = () => {
   fullscreenImage.value = null;
+};
+
+const prevModalImage = () => {
+  if (!selectedItem.value?.photos?.length) return;
+
+  const total = selectedItem.value.photos.length;
+  selectedImageIndex.value = (selectedImageIndex.value - 1 + total) % total;
+  selectedImage.value = selectedItem.value.photos[selectedImageIndex.value];
+};
+
+const nextModalImage = () => {
+  if (!selectedItem.value?.photos?.length) return;
+
+  const total = selectedItem.value.photos.length;
+  selectedImageIndex.value = (selectedImageIndex.value + 1) % total;
+  selectedImage.value = selectedItem.value.photos[selectedImageIndex.value];
+};
+
+const selectModalImage = (img, index) => {
+  selectedImage.value = img;
+  selectedImageIndex.value = index;
 };
 
 const scrollToCurrent = () => {
@@ -204,7 +228,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
             class="news-slider"
             :class="{
               'one-item': itemsCount === 1,
-              'two-items': itemsCount === 2
+              'two-items': itemsCount === 2,
             }"
           >
             <div
@@ -270,27 +294,69 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
           @click.self="closeModal"
         >
           <div class="news-modal">
-            <button
-              @click="closeModal"
-              class="news-modal-close"
-            >
-              ✕
-            </button>
+            <button @click="closeModal" class="news-modal-close">✕</button>
 
             <div v-if="selectedItem" class="news-modal-content">
               <div class="news-modal-hero">
                 <img
-                  :src="selectedImage || selectedItem.photos?.[0] || 'images/default.jpg'"
+                  :src="
+                    selectedImage ||
+                    selectedItem.photos?.[0] ||
+                    'images/default.jpg'
+                  "
                   alt="News image"
                   class="news-modal-hero-image clickable-image"
-                  @click="openImageViewer(selectedImage || selectedItem.photos?.[0] || 'images/default.jpg')"
+                  @click="
+                    openImageViewer(
+                      selectedImage ||
+                        selectedItem.photos?.[0] ||
+                        'images/default.jpg',
+                    )
+                  "
                 />
+
+                <template v-if="selectedItem?.photos?.length > 1">
+                <button
+  class="modal-image-nav modal-image-prev"
+  @click.stop="prevModalImage"
+>
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18L9 12L15 6" />
+  </svg>
+</button>
+
+<button
+  class="modal-image-nav modal-image-next"
+  @click.stop="nextModalImage"
+>
+  <svg viewBox="0 0 24 24">
+    <path d="M9 6L15 12L9 18" />
+  </svg>
+</button>
+                </template>
               </div>
 
               <div class="news-modal-body">
+                <div class="news-modal-gallery">
+                  <img
+                    v-for="(img, imgIndex) in selectedItem.photos"
+                    :key="imgIndex"
+                    :src="img"
+                    alt="News image"
+                    class="news-modal-thumb"
+                    :class="{ active: selectedImageIndex === imgIndex }"
+                    @click="selectModalImage(img, imgIndex)"
+                  />
+                </div>
+
+                <div class="news-modal-divider"></div>
                 <div class="news-modal-meta-top">
-                  <span class="news-modal-badge">{{ selectedItem.category }}</span>
-                  <span class="news-modal-date">{{ selectedItem.displayDate }}</span>
+                  <span class="news-modal-badge">{{
+                    selectedItem.category
+                  }}</span>
+                  <span class="news-modal-date">{{
+                    selectedItem.displayDate
+                  }}</span>
                 </div>
 
                 <h1 class="news-modal-title">
@@ -299,26 +365,11 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 
                 <div class="news-modal-author-row">
                   <div>
-                    <div class="news-modal-author-name">{{ selectedItem.name }}</div>
+                    <div class="news-modal-author-name">
+                      {{ selectedItem.name }}
+                    </div>
                   </div>
                 </div>
-
-                <div
-                  v-if="selectedItem?.photos?.length > 1"
-                  class="news-modal-gallery"
-                >
-                  <img
-                    v-for="(img, imgIndex) in selectedItem.photos"
-                    :key="imgIndex"
-                    :src="img"
-                    alt="News image"
-                    class="news-modal-thumb"
-                    :class="{ active: selectedImage === img }"
-                    @click="selectedImage = img; openImageViewer(img)"
-                  />
-                </div>
-
-                <div class="news-modal-divider"></div>
 
                 <div class="news-modal-detail">
                   {{ selectedItem.detail }}
@@ -342,10 +393,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
           class="image-viewer-overlay"
           @click.self="closeImageViewer"
         >
-          <button
-            class="image-viewer-close"
-            @click="closeImageViewer"
-          >
+          <button class="image-viewer-close" @click="closeImageViewer">
             ✕
           </button>
 
@@ -642,6 +690,8 @@ button:active {
   width: 100%;
   height: 380px;
   background: #e2e8f0;
+  position: relative;
+  overflow: hidden;
 }
 
 .news-modal-hero-image {
@@ -649,6 +699,40 @@ button:active {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.modal-image-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #0f172a;
+  font-size: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+  transition: all 0.2s ease;
+}
+
+.modal-image-nav:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.modal-image-prev {
+  left: 16px;
+}
+
+.modal-image-next {
+  right: 16px;
 }
 
 .news-modal-body {
@@ -681,7 +765,7 @@ button:active {
 }
 
 .news-modal-title {
-  margin: 0 0 20px;
+  margin: 0 0 0px;
   font-size: 34px;
   line-height: 1.28;
   font-weight: 800;
@@ -739,9 +823,13 @@ button:active {
   opacity: 0.5;
 }
 
+.news-modal-thumb.active {
+  border: 2px solid #2563eb;
+}
+
 .news-modal-divider {
   height: 1px;
-  background: linear-gradient(to right, #e2e8f0, transparent);
+  background-color: #e2e8f0;
   margin-bottom: 24px;
 }
 
@@ -750,6 +838,7 @@ button:active {
   line-height: 2;
   color: #334155;
   white-space: pre-line;
+  margin-bottom: 20px;
 }
 
 .clickable-image {
@@ -795,6 +884,15 @@ button:active {
 .image-viewer-close:hover {
   background: rgba(255, 255, 255, 0.24);
   transform: translateY(-1px);
+}
+
+.modal-image-nav svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  display: block;
 }
 
 @media (max-width: 991px) {
@@ -869,6 +967,20 @@ button:active {
   .news-modal-thumb {
     width: 90px;
     height: 72px;
+  }
+
+  .modal-image-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .modal-image-prev {
+    left: 10px;
+  }
+
+  .modal-image-next {
+    right: 10px;
   }
 }
 </style>

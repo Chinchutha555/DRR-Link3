@@ -8,7 +8,7 @@ const buttonPricing = "Pricing";
 </script>
 
 <template>
-  <div class="untree_co-hero" id="#home-section" style="padding-bottom: 0">
+  <div class="untree_co-hero" id="#home-section" style="padding-bottom: 30px">
     <div class="container">
       <div class="row align-items-center" style="padding-bottom: 0">
         <div class="col-12">
@@ -58,6 +58,10 @@ const buttonPricing = "Pricing";
 <style scoped>
 .pricing:hover {
   color: #fff !important;
+}
+
+.body{
+  background: linear-gradient(180deg, #f7fbfc 0%, #ffffff 100%);
 }
 
 
