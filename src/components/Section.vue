@@ -110,9 +110,9 @@ const goToImage = (index) => {
         <div class="col-lg-6 order-lg-2">
           <div class="feature-label">{{ service1SubHeading }}</div>
 
-          <h3 class="heading feature-title">
+          <p class="heading feature-title">
             {{ service1Title }}
-          </h3>
+          </p>
 
           <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
             <p>
@@ -247,5 +247,9 @@ const goToImage = (index) => {
 .dot.active {
   width: 18px;
   background: #3b82f6;
+}
+
+.feature-title{
+  font-size: 24px;
 }
 </style>
