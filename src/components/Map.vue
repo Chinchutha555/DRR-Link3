@@ -17,9 +17,9 @@ const props = defineProps({
 const mapRef = ref(null);
 const mapInstance = ref(null);
 const mapReady = ref(false);
-const zoom = ref(6);  // เก็บค่าซูม
-const center = ref([16.5, 101.0]); // เก็บตำแหน่งศูนย์กลาง
-const selectedRegion = ref("all"); // ค่าฟิลเตอร์ภูมิภาค
+const zoom = ref(6);
+const center = ref([16.5, 101.0]);
+const selectedRegion = ref("all");
 const labelMarkers = ref([]);
 const geoJsonKey = ref(0);
 
@@ -41,14 +41,11 @@ const REGION_LABEL_MAP = computed(() => {
 });
 
 const regionOptions = computed(() => {
-  // แยกข้อมูลภูมิภาคตามเฟส
   const seen = new Set();
   if (props.phase === "phase1") {
-    // สำหรับ Phase 1
     seen.add("ภาคเหนือ");
     seen.add("ภาคตะวันออกเฉียงเหนือ");
   } else if (props.phase === "phase2") {
-    // สำหรับ Phase 2
     seen.add("lowerNortheast");
     seen.add("east");
     seen.add("upperCentral");
@@ -60,6 +57,18 @@ const regionOptions = computed(() => {
   return [{ key: "all", label: "ทั้งหมด" }, ...dynamicOptions];
 });
 
+// ── helper: กรอง features ที่มี coordinates ว่างออก ──
+function hasCoordinates(feature) {
+  const coords = feature?.geometry?.coordinates;
+  if (!coords || coords.length === 0) return false;
+  // MultiLineString: coordinates = [segment, ...] ต้องมี segment ที่ไม่ว่าง
+  if (feature.geometry.type === "MultiLineString") {
+    return coords.some((segment) => segment.length > 0);
+  }
+  // LineString: coordinates = [[lon,lat], ...]
+  return coords.length > 0;
+}
+
 // ── computed ──────────────────────────────────────────
 const phaseLabel = computed(() => props.phase === "phase1" ? "Phase 1" : "Phase 2");
 
@@ -69,15 +78,18 @@ const regionLabel = computed(() => {
 });
 
 const filteredFeatures = computed(() => {
-  if (props.phase === "phase2") return []; // Phase 2 data is empty for now
+  if (props.phase === "phase2") return [];
+
+  // กรอง features ที่มี coordinates ว่างออกทุกกรณี
+  const validFeatures = routesData.features.filter(hasCoordinates);
 
   if (selectedRegion.value === "all") {
-    return routesData.features;
+    return validFeatures;
   }
   if (selectedRegion.value === "__null__") {
-    return routesData.features.filter((f) => f.properties.region == null);
+    return validFeatures.filter((f) => f.properties.region == null);
   }
-  return routesData.features.filter(
+  return validFeatures.filter(
     (f) => f.properties.region === selectedRegion.value
   );
 });
@@ -133,15 +145,28 @@ function clearLabels() {
   labelMarkers.value = [];
 }
 
-function getMultiLineCenter(coordinates) {
+// FIX: รองรับทั้ง LineString และ MultiLineString
+function getLineCenter(geometry) {
   let latSum = 0, lonSum = 0, count = 0;
-  coordinates.forEach((segment) => {
-    segment.forEach(([lon, lat]) => {
+
+  if (geometry.type === "LineString") {
+    // coordinates = [[lon, lat], [lon, lat], ...]
+    geometry.coordinates.forEach(([lon, lat]) => {
       latSum += lat;
       lonSum += lon;
       count++;
     });
-  });
+  } else if (geometry.type === "MultiLineString") {
+    // coordinates = [[[lon, lat], ...], [[lon, lat], ...], ...]
+    geometry.coordinates.forEach((segment) => {
+      segment.forEach(([lon, lat]) => {
+        latSum += lat;
+        lonSum += lon;
+        count++;
+      });
+    });
+  }
+
   return count > 0 ? [latSum / count, lonSum / count] : null;
 }
 
@@ -149,20 +174,21 @@ function addLabels(map) {
   const seen = new Set();
   filteredFeatures.value.forEach((feature) => {
     const name = feature.properties.field_2;
-    if (seen.has(name)) return;
+    if (!name || seen.has(name)) return;
     seen.add(name);
 
-    const center = getMultiLineCenter(feature.geometry.coordinates);
-    if (!center) return;
+    // FIX: ส่ง geometry object แทนแค่ coordinates
+    const labelCenter = getLineCenter(feature.geometry);
+    if (!labelCenter) return;
 
     const icon = L.divIcon({
       className: "route-label",
       html: `<div class="route-label-text">${name}</div>`,
-      iconSize: [150, 35], // ขยายขนาดของ label
-      iconAnchor: [75, 18], // ให้ label ชิดกับเส้นทางมากขึ้น
+      iconSize: [150, 35],
+      iconAnchor: [75, 18],
     });
 
-    const marker = L.marker(center, { icon, interactive: false }).addTo(map);
+    const marker = L.marker(labelCenter, { icon, interactive: false }).addTo(map);
     labelMarkers.value.push(marker);
   });
 }
@@ -183,59 +209,97 @@ function onLineClick(event) {
   if (!p) return;
   L.popup()
     .setLatLng(event.latlng)
-    .setContent(
-      `<b>${p.field_2}</b>
-      `
-    )
+    .setContent(`<b>${p.field_2}</b>`)
     .openOn(mapInstance.value);
 }
 
 // ── bounds ────────────────────────────────────────────
+// FIX: คำนวณ bounds จากข้อมูลจริงของ features ที่กรองแล้ว
+function getBoundsFromFeatures(features) {
+  let minLat = Infinity, maxLat = -Infinity;
+  let minLon = Infinity, maxLon = -Infinity;
+
+  features.forEach((feature) => {
+    const geom = feature.geometry;
+    const allCoords = geom.type === "LineString"
+      ? geom.coordinates
+      : geom.type === "MultiLineString"
+        ? geom.coordinates.flat()
+        : [];
+
+    allCoords.forEach(([lon, lat]) => {
+      if (lat < minLat) minLat = lat;
+      if (lat > maxLat) maxLat = lat;
+      if (lon < minLon) minLon = lon;
+      if (lon > maxLon) maxLon = lon;
+    });
+  });
+
+  if (minLat === Infinity) return null;
+  return [[minLat, minLon], [maxLat, maxLon]];
+}
+
 const REGION_BOUNDS = {
   "ภาคเหนือ":               [[16.8215, 97.7533], [20.0983, 101.0210]],
-  "ภาคตะวันออกเฉียงเหนือ": [[15.8439, 101.5752], [18.2759, 104.7909]],
+  "ภาคตะวันออกเฉียงเหนือ": [[14.0, 101.0],      [18.2759, 104.7909]],
 };
-const ALL_BOUNDS = [[15.8439, 97.7533], [20.0983, 104.7909]];
+
+// FIX: ALL_BOUNDS ขยายให้ครอบคลุมทุก feature จริงๆ
+// โดยใช้ static fallback กว้างขึ้น หรือคำนวณจาก data
+const ALL_BOUNDS_FALLBACK = [[13.5, 97.0], [20.5, 105.5]];
 
 function flyToRegion(key) {
   if (!mapInstance.value) return;
-  const bounds = key === "all" ? ALL_BOUNDS : REGION_BOUNDS[key];
-  if (bounds) {
+
+  if (key === "all") {
+    // FIX: คำนวณ bounds จาก features จริงทั้งหมด
+    const bounds = getBoundsFromFeatures(filteredFeatures.value) || ALL_BOUNDS_FALLBACK;
     mapInstance.value.flyToBounds(bounds, { padding: [40, 40], duration: 0.8 });
+  } else if (REGION_BOUNDS[key]) {
+    mapInstance.value.flyToBounds(REGION_BOUNDS[key], { padding: [40, 40], duration: 0.8 });
+  } else {
+    // FIX: ถ้าไม่มีใน REGION_BOUNDS ให้คำนวณจาก features ที่กรองแล้ว
+    const features = routesData.features.filter(
+      (f) => f.properties.region === key && hasCoordinates(f)
+    );
+    const bounds = getBoundsFromFeatures(features);
+    if (bounds) {
+      mapInstance.value.flyToBounds(bounds, { padding: [40, 40], duration: 0.8 });
+    }
   }
 }
 
 // ── region selection ──────────────────────────────────
 async function selectRegion(key) {
-  // หากเป็น Phase 2 และไม่มีข้อมูล, ไม่ให้แผนที่เคลื่อนที่
   if (props.phase === "phase2") {
-    selectedRegion.value = key; // อัปเดตฟิลเตอร์
+    selectedRegion.value = key;
     await nextTick();
-    geoJsonKey.value++; // รีเฟรชแผนที่
-    clearLabels(); // ลบ label ที่เก่า
-    return; // ไม่ทำการเคลื่อนที่แผนที่ใน Phase 2
+    geoJsonKey.value++;
+    clearLabels();
+    return;
   }
 
-  // สำหรับ Phase 1 หรือเมื่อมีข้อมูลใน Phase 2
   selectedRegion.value = key;
   await nextTick();
   geoJsonKey.value++;
   clearLabels();
-  flyToRegion(key); // ทำให้แผนที่เคลื่อนที่ไปที่ภูมิภาคที่เลือก
+  flyToRegion(key);
 }
 
 // ── map ready ─────────────────────────────────────────
 function onMapReady(map) {
   mapInstance.value = map;
-  map.fitBounds(ALL_BOUNDS, { padding: [30, 30] });
+  // กรอง empty coordinates ออกก่อนคำนวณ bounds
+  const validFeatures = routesData.features.filter(hasCoordinates);
+  const bounds = getBoundsFromFeatures(validFeatures) || ALL_BOUNDS_FALLBACK;
+  map.fitBounds(bounds, { padding: [30, 30] });
   map.invalidateSize();
 }
 
 // ── watch ────────────────────────────────────────────
 watch(
-  () => props.phase,  // ติดตามการเปลี่ยนแปลงของเฟส
+  () => props.phase,
   (newPhase) => {
-    // เมื่อเปลี่ยนเฟสให้รีเซ็ตแผนที่
     if (newPhase === "phase2" || newPhase === "phase1") {
       selectedRegion.value = "all";
     }
@@ -252,7 +316,6 @@ onMounted(() => {
     <div class="map-header">
       <h3 class="map-title">แผนที่โครงการ</h3>
       <div class="map-toolbar">
-        <!-- Filter buttons always visible -->
         <button
           v-for="item in regionOptions"
           :key="item.key"
@@ -266,28 +329,23 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- subtitle visible for phase1 -->
     <div class="map-subtitle" v-if="props.phase === 'phase1'">
       <span>ข้อมูลที่แสดง:</span>
       <strong>{{ phaseLabel }}</strong>
       <span class="divider">|</span>
       <span>พื้นที่:</span>
       <strong>{{ regionLabel }}</strong>
-      
     </div>
 
-    <!-- subtitle visible for phase2 -->
     <div class="map-subtitle" v-if="props.phase === 'phase2'">
       <span>ข้อมูลที่แสดง:</span>
       <strong>{{ phaseLabel }}</strong>
       <span class="divider">|</span>
       <span>พื้นที่:</span>
       <strong>{{ regionLabel }}</strong>
-      
     </div>
 
     <div class="map-wrapper">
-      <!-- Render the map lines only for phase1 -->
       <l-map
         v-if="mapReady"
         ref="mapRef"
@@ -303,7 +361,6 @@ onMounted(() => {
           name="OpenStreetMap"
         />
 
-        <!-- Phase 1 map rendering -->
         <l-geo-json
           v-if="filteredFeatures.length && props.phase === 'phase1'"
           :key="geoJsonKey"
@@ -312,7 +369,6 @@ onMounted(() => {
           @click="onLineClick"
         />
 
-        <!-- Phase 2 map rendering -->
         <l-geo-json
           v-if="props.phase === 'phase2'"
           :geojson="geoJsonCollection"
@@ -401,7 +457,7 @@ onMounted(() => {
 }
 
 :deep(.route-label) {
-  background-color: rgba(0, 0, 0, 0.5); /* พื้นหลังสีดำใส */
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 5px 10px;
   font-size: 12px;
   font-weight: 600;
