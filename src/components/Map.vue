@@ -184,8 +184,7 @@ function onLineClick(event) {
   L.popup()
     .setLatLng(event.latlng)
     .setContent(
-      `<b>${p.field_2}</b><br>ภาค: ${p.region || "-"}<br>ระยะทาง: ${
-        p.st_length_ ? p.st_length_.toFixed(2) + " กม." : "-"
+      `<b>${p.field_2}</b><br>ภาค: ${p.region || "-"
       }`
     )
     .openOn(mapInstance.value);
