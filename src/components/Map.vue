@@ -184,8 +184,8 @@ function onLineClick(event) {
   L.popup()
     .setLatLng(event.latlng)
     .setContent(
-      `<b>${p.field_2}</b><br>ภาค: ${p.region || "-"
-      }`
+      `<b>${p.field_2}</b>
+      `
     )
     .openOn(mapInstance.value);
 }
