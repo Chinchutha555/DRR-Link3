@@ -9,7 +9,6 @@ const images = [
   "images/New/30_03_69_2/02.jpg",
   "images/New/30_03_69_2/03.jpg",
   "images/New/30_03_69_2/04.jpg",
-  "images/New/30_03_69_2/05.jpg",
 ];
 
 const currentIndex = ref(0);
