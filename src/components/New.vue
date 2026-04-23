@@ -42,6 +42,11 @@ const blogItems = computed(() => {
       displayDate: formatThaiDate(item.date),
     }));
 
+  // ถ้า heading เป็น "ล่าสุด" หรือ ข่าวใหม่
+  if (props.heading === "ล่าสุด") {
+    return sortedItems.slice(0, 3);
+  }
+
   return props.limit ? sortedItems.slice(0, props.limit) : sortedItems;
 });
 
