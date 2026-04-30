@@ -9,10 +9,10 @@ const dashboardData = computed(() => {
     return {
       routeCount: 50,
       routeLabel: "สายทางในระยะ Phase 2",
-      distance: "2,800",
-      progress: 20.33,
+      distance: "3,156.449",
+      progress: 27.64,
       progressLabel: "ความคืบหน้า",
-      status: "กำลังดำเนินการ : 569.214 กม.",
+      status: "กำลังดำเนินการ : 872.475 กม.",
     };
   }
 
@@ -108,7 +108,7 @@ watch(selectedTab, async () => {
                   class="status-badge"
                   :class="{
                     success: dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
-                    processing: dashboardData.status === 'กำลังดำเนินการ : 569.214 กม.',
+                    processing: dashboardData.status === 'กำลังดำเนินการ : 872.475 กม.',
                   }"
                 >
                   {{ dashboardData.status }}
