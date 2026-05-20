@@ -12,7 +12,7 @@ const dashboardData = computed(() => {
       distance: "3,040.628",
       progress: 28.69,
       progressLabel: "ความคืบหน้าการสำรวจ",
-      status: "กำลังดำเนินการ : 872.475 กม.",
+      status: "ดำเนินการไปแล้ว : 872.475 กม.",
     };
   }
 
@@ -70,7 +70,26 @@ watch(selectedTab, async () => {
     </div>
 
     <div class="container">
-      <!-- TOP ROW: 3 กล่อง -->
+      <!-- TOP ROW: 2 กล่อง -->
+      <div class="overview-section" data-aos="fade-up" data-aos-delay="120">
+        <div class="overview-content">
+          <div>
+            <div class="stat-box" data-aos="fade-right" data-aos-delay="150">
+              <h3>ความก้าวหน้าภาพรวม</h3>
+            </div>
+            <p class="overview-desc">สรุปภาพรวมผลการดำเนินงานของโครงการ</p>
+          </div>
+
+          <div class="overview-percent-wrap">
+            <span class="overview-percent">
+              {{ selectedTab === "phase1" ? "100" : "41.44" }}
+            </span>
+            <span class="overview-unit">%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP ROW: 2 กล่อง -->
       <div class="top-row">
         <div class="box stat-box" data-aos="fade-right" data-aos-delay="150">
           <h3>จำนวนสายทาง</h3>
@@ -80,21 +99,13 @@ watch(selectedTab, async () => {
           </p>
         </div>
 
-        <div class="box stat-box" data-aos="fade-up" data-aos-delay="200">
+        <div class="box stat-box" data-aos="fade-left" data-aos-delay="200">
           <h3>ระยะทางรวม</h3>
           <p class="stat-value">
             {{ dashboardData.distance }}
             <span class="stat-label">กิโลเมตร</span>
           </p>
         </div>
-
-    <div class="box stat-box overview-box" data-aos="fade-left" data-aos-delay="250">
-  <h3>ภาพรวมโครงการ</h3>
-  <p class="stat-value">
-    {{ selectedTab === "phase1" ? "100" : "41.44" }}
-    <span class="stat-label">%</span>
-  </p>
-</div>
       </div>
       <!-- PROGRESS ROW: เต็มแถว -->
       <div class="progress-row" data-aos="fade-right">
@@ -117,7 +128,7 @@ watch(selectedTab, async () => {
                     success:
                       dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
                     processing:
-                      dashboardData.status === 'กำลังดำเนินการ : 872.475 กม.',
+                      dashboardData.status === 'ดำเนินการไปแล้ว : 872.475 กม.',
                   }"
                 >
                   {{ dashboardData.status }}
@@ -263,7 +274,6 @@ watch(selectedTab, async () => {
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     background-color 0.25s ease;
-  box-shadow: 0 6px 18px rgba(0, 76, 255, 0.04);
 }
 
 .stat-box h3,
@@ -436,35 +446,103 @@ button:active {
   margin-left: auto; /* ตัวนี้สำคัญ */
 }
 
-/* กล่องภาพรวมโครงการ */
-.overview-box {
+/* OVERVIEW SECTION */
+.overview-section {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 26px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(64, 123, 255, 0.18);
   background:
-    radial-gradient(circle at top right, rgba(96, 165, 250, 0.24), transparent 36%),
-    linear-gradient(135deg, #eff6ff 0%, #ffffff 52%, #eef2ff 100%);
+    radial-gradient(
+      circle at top right,
+      rgba(96, 165, 250, 0.32),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #eff6ff 0%, #ffffff 48%, #eef2ff 100%);
+}
 
+.overview-section::before {
+  content: "";
+  position: absolute;
+  right: -70px;
+  top: -70px;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: rgba(64, 123, 255, 0.12);
 }
 
 
-
-.overview-box h3,
-.overview-box .stat-value,
-.overview-box .stat-label {
+.overview-content {
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
 }
 
-.overview-box h3 {
-  color: #1e3a8a;
+.section-eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  text-transform: uppercase;
 }
 
-.overview-box .stat-value {
+.overview-content h2 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 850;
+  color: #0f172a;
+}
+
+.overview-desc {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: #64748b;
+}
+
+.overview-percent-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 180px;
+  padding: 18px 24px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(219, 227, 239, 0.9);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+}
+
+.overview-percent {
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1;
   color: #1d4ed8;
 }
 
-.overview-box .stat-label {
-  color: #475569;
+.overview-unit {
+  margin-left: 6px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+/* SECTION TITLE */
+.section-title-row {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.section-title-row h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e293b;
 }
 </style>
