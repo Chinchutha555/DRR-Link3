@@ -128,7 +128,7 @@ watch(selectedTab, async () => {
                     success:
                       dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
                     processing:
-                      dashboardData.status === 'ดำเนินการไปแล้ว : 872.475 กม.',
+                      dashboardData.status === 'ดำเนินการไปแล้ว : 2,634.432 กม.',
                   }"
                 >
                   {{ dashboardData.status }}
