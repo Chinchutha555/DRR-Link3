@@ -75,7 +75,7 @@ watch(selectedTab, async () => {
         <div class="overview-content">
           <div>
             <div class="stat-box" data-aos="fade-right" data-aos-delay="150">
-              <h3>ความก้าวหน้าภาพรวม</h3>
+              <h3>ภาพรวมโครงการ</h3>
             </div>
             <p class="overview-desc">สรุปภาพรวมผลการดำเนินงานของโครงการ</p>
           </div>
