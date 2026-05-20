@@ -7,11 +7,11 @@ const selectedTab = ref("phase1");
 const dashboardData = computed(() => {
   if (selectedTab.value === "phase2") {
     return {
-      routeCount: 50,
+      routeCount: 56,
       routeLabel: "สายทางในระยะ Phase 2",
-      distance: "3,156.449",
-      progress: 27.64,
-      progressLabel: "ความคืบหน้า",
+      distance: "3,040.628",
+      progress: 28.69,
+      progressLabel: "ความคืบหน้าการสำรวจ",
       status: "กำลังดำเนินการ : 872.475 กม.",
     };
   }
@@ -21,7 +21,7 @@ const dashboardData = computed(() => {
     routeLabel: "สายทางในระยะ Phase 1",
     distance: "2,828.57",
     progress: 100,
-    progressLabel: "ความคืบหน้า",
+    progressLabel: "ความคืบหน้าการสำรวจ",
     status: "เสร็จสิ้น : 2,828.57 กม.",
   };
 });
@@ -70,7 +70,7 @@ watch(selectedTab, async () => {
     </div>
 
     <div class="container">
-      <!-- TOP ROW: 2 กล่อง -->
+      <!-- TOP ROW: 3 กล่อง -->
       <div class="top-row">
         <div class="box stat-box" data-aos="fade-right" data-aos-delay="150">
           <h3>จำนวนสายทาง</h3>
@@ -80,15 +80,22 @@ watch(selectedTab, async () => {
           </p>
         </div>
 
-        <div class="box stat-box" data-aos="fade-left" data-aos-delay="200">
+        <div class="box stat-box" data-aos="fade-up" data-aos-delay="200">
           <h3>ระยะทางรวม</h3>
           <p class="stat-value">
             {{ dashboardData.distance }}
             <span class="stat-label">กิโลเมตร</span>
           </p>
         </div>
-      </div>
 
+    <div class="box stat-box overview-box" data-aos="fade-left" data-aos-delay="250">
+  <h3>ภาพรวมโครงการ</h3>
+  <p class="stat-value">
+    {{ selectedTab === "phase1" ? "100" : "41.44" }}
+    <span class="stat-label">%</span>
+  </p>
+</div>
+      </div>
       <!-- PROGRESS ROW: เต็มแถว -->
       <div class="progress-row" data-aos="fade-right">
         <div class="box progress-box">
@@ -107,8 +114,10 @@ watch(selectedTab, async () => {
                 <span
                   class="status-badge"
                   :class="{
-                    success: dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
-                    processing: dashboardData.status === 'กำลังดำเนินการ : 872.475 กม.',
+                    success:
+                      dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
+                    processing:
+                      dashboardData.status === 'กำลังดำเนินการ : 872.475 กม.',
                   }"
                 >
                   {{ dashboardData.status }}
@@ -427,4 +436,35 @@ button:active {
   margin-left: auto; /* ตัวนี้สำคัญ */
 }
 
+/* กล่องภาพรวมโครงการ */
+.overview-box {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.24), transparent 36%),
+    linear-gradient(135deg, #eff6ff 0%, #ffffff 52%, #eef2ff 100%);
+
+}
+
+
+
+.overview-box h3,
+.overview-box .stat-value,
+.overview-box .stat-label {
+  position: relative;
+  z-index: 1;
+}
+
+.overview-box h3 {
+  color: #1e3a8a;
+}
+
+.overview-box .stat-value {
+  color: #1d4ed8;
+}
+
+.overview-box .stat-label {
+  color: #475569;
+}
 </style>

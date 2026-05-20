@@ -321,23 +321,23 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
                 />
 
                 <template v-if="selectedItem?.photos?.length > 1">
-                <button
-  class="modal-image-nav modal-image-prev"
-  @click.stop="prevModalImage"
->
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18L9 12L15 6" />
-  </svg>
-</button>
+                  <button
+                    class="modal-image-nav modal-image-prev"
+                    @click.stop="prevModalImage"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M15 18L9 12L15 6" />
+                    </svg>
+                  </button>
 
-<button
-  class="modal-image-nav modal-image-next"
-  @click.stop="nextModalImage"
->
-  <svg viewBox="0 0 24 24">
-    <path d="M9 6L15 12L9 18" />
-  </svg>
-</button>
+                  <button
+                    class="modal-image-nav modal-image-next"
+                    @click.stop="nextModalImage"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9 6L15 12L9 18" />
+                    </svg>
+                  </button>
                 </template>
               </div>
 
@@ -703,11 +703,11 @@ button:active {
   max-width: 100%;
   max-height: 100%;
 
-  width: auto;      /* 👈 ไม่ยืด */
-  height: auto;     /* 👈 ไม่ยืด */
+  width: auto; /* 👈 ไม่ยืด */
+  height: auto; /* 👈 ไม่ยืด */
 
   object-fit: contain;
-  margin: auto;     /* 👈 ให้อยู่กลาง */
+  margin: auto; /* 👈 ให้อยู่กลาง */
   display: block;
 }
 
