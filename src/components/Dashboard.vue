@@ -10,9 +10,9 @@ const dashboardData = computed(() => {
       routeCount: 56,
       routeLabel: "สายทางในระยะ Phase 2",
       distance: "3,040.628",
-      progress: 28.69,
+      progress: 86.64,
       progressLabel: "ความคืบหน้าการสำรวจ",
-      status: "ดำเนินการไปแล้ว : 872.475 กม.",
+      status: "ดำเนินการไปแล้ว : 2,634.432 กม.",
     };
   }
 
