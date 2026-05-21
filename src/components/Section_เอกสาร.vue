@@ -92,14 +92,6 @@ const documents = [
   margin-left: 0
 }
 
-.doc-visual-bg {
-  /* position: absolute;
-  inset: 40px 30px 70px 20px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #eff6ff 0%, #f8fbff 55%, #ffffff 100%);
-  z-index: 0; */
-}
-
 .doc-image-main-card {
   position: relative;
   z-index: 2;

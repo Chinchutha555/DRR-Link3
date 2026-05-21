@@ -543,6 +543,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
   font-weight: 800;
   color: #0f172a;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -555,6 +556,7 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
   line-height: 1.7;
   color: #64748b;
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
