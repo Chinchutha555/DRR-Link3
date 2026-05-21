@@ -56,7 +56,6 @@ const goToImage = (index) => {
 <template>
   <div
     class="untree_co-section"
-    id="features-section"
     data-aos="fade-up"
     data-aos-duration="800"
   >
