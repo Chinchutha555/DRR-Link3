@@ -49,7 +49,7 @@ watch(selectedTab, async () => {
 </script>
 
 <template>
-  <div class="untree_co-section" id="pricing-section">
+  <div class="untree_co-section" id="progress-section">
     <h3
       class="heading text-center"
       data-aos="fade-up"

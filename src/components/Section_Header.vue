@@ -28,7 +28,7 @@ import logo from "../assets/images/logo_DRR.svg";
           </li> -->
           <li><a href="#features-section" class="nav-link">ที่มาและความสำคัญ</a></li>
            <li><a href="#objective-section" class="nav-link">วัตถุประสงค์</a></li>
-          <li><a href="#pricing-section" class="nav-link">ความคืบหน้าโครงการ</a></li>
+          <li><a href="#progress-section" class="nav-link">ความคืบหน้าโครงการ</a></li>
           <li><a href="#result-section" class="nav-link">ผลการศึกษา</a></li>
           <li><a href="#status-section" class="nav-link">สถานะการดำเนินงาน</a></li>
           <li><a href="#file-section" class="nav-link">เอกสาร</a></li>
