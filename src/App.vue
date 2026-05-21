@@ -1,23 +1,16 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import Header from "./components/Header.vue";
-import Hero from "./components/Hero.vue";
-import Service1 from "./components/Service1.vue";
-import Service2 from "./components/Service2.vue";
-import Feature from "./components/Feature.vue";
-import Pricing from "./components/Pricing.vue";
-import Advantage from "./components/Advantage.vue";
-import News from "./components/New.vue";
-import About from "./components/About.vue";
-// import Blog from "./components/New_all.vue";
-import Footer from "./components/Footer.vue";
-import Customer from "./components/Customer.vue";
-import banner from "./components/Content.vue";
-import Dashboard from "./components/Dashboard.vue";
-import Status from "./components/Status.vue";
-import File from "./components/File.vue";
-import Section from "./components/Section.vue";
-import Map from "./components/Map.vue"
+import Header from "./components/Section_Header.vue";
+import Hero from "./components/Section_อธิบาย.vue";
+import Service1 from "./components/Section_ที่มา.vue";
+import Service2 from "./components/Section_ผลการศึกษา.vue";
+import Feature from "./components/Section_วัตถุประสงค์.vue";
+import News from "./components/Section_ข่าว.vue";
+import Footer from "./components/Section_Footer.vue";
+import Dashboard from "./components/Section_ความคืบหน้า.vue";
+import Status from "./components/Section_สถานะการดำเนินงาน.vue";
+import File from "./components/Section_เอกสาร.vue";
+import Section from "./components/Section_MMS.vue";
 
 const showButton = ref(false);
 
@@ -52,8 +45,6 @@ onBeforeUnmount(() => {
     sectionId="testimonials-section"
     :limit="6"
   />
-
-  <!-- <Map/> -->
 
   <Service1 />
   <Feature />
