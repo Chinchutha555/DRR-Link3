@@ -4,25 +4,29 @@ import ProjectMap from "./Map_P1+P2.vue";
 
 const selectedTab = ref("phase1");
 
+
 const dashboardData = computed(() => {
+
+  // ข้อมูลสำหรับ Phase 2
   if (selectedTab.value === "phase2") {
     return {
-      routeCount: 56,
-      routeLabel: "สายทางในระยะ Phase 2",
-      distance: "3,040.628",
-      progress: 86.64,
-      progressLabel: "ความคืบหน้าการสำรวจ",
-      status: "ดำเนินการไปแล้ว : 2,634.432 กม.",
+      overviewPercent: "41.44", //เปอร์เซ็นต์ความคืบหน้าโดยรวมของโครงการ
+      routeCount: 56, //จำนวนสายทาง
+      distance: "3,040.628", //ระยะทางรวม
+      progress: 86.64, // ความคืบหน้าการสำรวจ
+      statusType: "processing", // สถานะความคืบหน้าการสำรวจ
+      statusText: "ดำเนินการไปแล้ว : 2,634.432 กม.", // ข้อความสถานะความคืบหน้าการสำรวจ
     };
   }
 
+  // ข้อมูลสำหรับ Phase 1
   return {
-    routeCount: 40,
-    routeLabel: "สายทางในระยะ Phase 1",
-    distance: "2,828.57",
-    progress: 100,
-    progressLabel: "ความคืบหน้าการสำรวจ",
-    status: "เสร็จสิ้น : 2,828.57 กม.",
+    overviewPercent: "100", //เปอร์เซ็นต์ความคืบหน้าโดยรวมของโครงการ
+    routeCount: 40, //จำนวนสายทาง
+    distance: "2,828.57", //ระยะทางรวม
+    progress: 100, // ความคืบหน้าการสำรวจ
+    statusType: "success", // สถานะความคืบหน้าการสำรวจ
+    statusText: "เสร็จสิ้น : 2,828.57 กม.", // ข้อความสถานะความคืบหน้าการสำรวจ
   };
 });
 
@@ -82,7 +86,7 @@ watch(selectedTab, async () => {
 
           <div class="overview-percent-wrap">
             <span class="overview-percent">
-              {{ selectedTab === "phase1" ? "100" : "41.44" }}
+              {{ dashboardData.overviewPercent }}
             </span>
             <span class="overview-unit">%</span>
           </div>
@@ -111,7 +115,7 @@ watch(selectedTab, async () => {
       <div class="progress-row" data-aos="fade-right">
         <div class="box progress-box">
           <div class="progress-header">
-            <h3>{{ dashboardData.progressLabel }}</h3>
+            <h3>ความคืบหน้าการสำรวจ</h3>
             <span class="progress-percent">{{ dashboardData.progress }}%</span>
           </div>
 
@@ -124,14 +128,9 @@ watch(selectedTab, async () => {
 
                 <span
                   class="status-badge"
-                  :class="{
-                    success:
-                      dashboardData.status === 'เสร็จสิ้น : 2,828.57 กม.',
-                    processing:
-                      dashboardData.status === 'ดำเนินการไปแล้ว : 2,634.432 กม.',
-                  }"
+                  :class="dashboardData.statusType"
                 >
-                  {{ dashboardData.status }}
+                  {{ dashboardData.statusText }}
                 </span>
               </div>
             </div>
