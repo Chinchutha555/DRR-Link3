@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from "vue";
 import { newsItems } from "../data/news";
 
 const props = defineProps({
@@ -20,6 +20,8 @@ const props = defineProps({
     default: null,
   },
 });
+
+const themeColor = "#2563eb";
 
 const formatThaiDate = (dateString) => {
   if (!dateString) return "";
@@ -58,10 +60,30 @@ const fullscreenImage = ref(null);
 const slider = ref(null);
 
 const currentIndex = ref(0);
-const itemsPerPage = 3;
+const itemsPerPage = ref(3);
+
+const updateItemsPerPage = () => {
+  if (window.innerWidth <= 767) {
+    itemsPerPage.value = 1;
+  } else if (window.innerWidth <= 991) {
+    itemsPerPage.value = 2;
+  } else {
+    itemsPerPage.value = 3;
+  }
+
+  const maxIndex = Math.max(totalPages.value - 1, 0);
+
+  if (currentIndex.value > maxIndex) {
+    currentIndex.value = maxIndex;
+  }
+
+  nextTick(() => {
+    scrollToCurrent(false);
+  });
+};
 
 const totalPages = computed(() =>
-  Math.ceil(blogItems.value.length / itemsPerPage),
+  Math.ceil(blogItems.value.length / itemsPerPage.value),
 );
 
 const isAtStart = computed(() => currentIndex.value === 0);
@@ -113,32 +135,50 @@ const selectModalImage = (img, index) => {
   selectedImageIndex.value = index;
 };
 
-const scrollToCurrent = () => {
+const scrollToCurrent = (smooth = true) => {
   if (!slider.value) return;
 
-  const width = slider.value.clientWidth;
+  const slide = slider.value.querySelector(".news-slide");
+  if (!slide) return;
+
+  const gap = Number.parseFloat(getComputedStyle(slider.value).gap) || 0;
+  const slideWidth = slide.offsetWidth + gap;
+
   slider.value.scrollTo({
-    left: width * currentIndex.value,
-    behavior: "smooth",
+    left: slideWidth * currentIndex.value * itemsPerPage.value,
+    behavior: smooth ? "smooth" : "auto",
   });
 };
 
-const next = () => {
+const next = async () => {
   if (isAtEnd.value) return;
+
   currentIndex.value++;
+  await nextTick();
   scrollToCurrent();
 };
 
-const prev = () => {
+const prev = async () => {
   if (isAtStart.value) return;
+
   currentIndex.value--;
+  await nextTick();
   scrollToCurrent();
 };
 
-const goTo = (index) => {
+const goTo = async (index) => {
   currentIndex.value = index;
+  await nextTick();
   scrollToCurrent();
 };
+
+watch(blogItems, () => {
+  currentIndex.value = 0;
+
+  nextTick(() => {
+    scrollToCurrent(false);
+  });
+});
 
 watch([showModal, fullscreenImage], ([modal, image]) => {
   if (modal || image) {
@@ -151,6 +191,18 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   }
+});
+
+onMounted(() => {
+  updateItemsPerPage();
+  window.addEventListener("resize", updateItemsPerPage);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateItemsPerPage);
+
+  document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
 });
 </script>
 
@@ -356,12 +408,12 @@ watch([showModal, fullscreenImage], ([modal, image]) => {
 
                 <div class="news-modal-divider"></div>
                 <div class="news-modal-meta-top">
-                  <span class="news-modal-badge">{{
-                    selectedItem.category
-                  }}</span>
-                  <span class="news-modal-date">{{
-                    selectedItem.displayDate
-                  }}</span>
+                  <span class="news-modal-badge">
+                    {{ selectedItem.category }}
+                  </span>
+                  <span class="news-modal-date">
+                    {{ selectedItem.displayDate }}
+                  </span>
                 </div>
 
                 <h1 class="news-modal-title">
@@ -704,12 +756,10 @@ button:active {
 .news-modal-hero-image {
   max-width: 100%;
   max-height: 100%;
-
-  width: auto; /* 👈 ไม่ยืด */
-  height: auto; /* 👈 ไม่ยืด */
-
+  width: auto;
+  height: auto;
   object-fit: contain;
-  margin: auto; /* 👈 ให้อยู่กลาง */
+  margin: auto;
   display: block;
 }
 
