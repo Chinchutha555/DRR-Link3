@@ -4,32 +4,50 @@ import ProjectMap from "./Map_P1+P2.vue";
 
 const selectedTab = ref("phase1");
 
+/**
+ * จุดแก้หลักเวลาเพิ่ม Phase ใหม่
+ * ถ้ามี P3, P4 ให้เพิ่ม object ใหม่ใน phaseConfig ได้เลย
+ */
 const phaseConfig = {
   phase1: {
     label: "Phase 1",
     themeClass: "section-blue",
-    overviewPercent: "100", //เปอร์เซ็นต์ความคืบหน้าโดยรวมของโครงการ
-    routeCount: 40, //จำนวนสายทาง
-    distance: "2,828.57", //ระยะทางรวม
+    overviewPercent: "100", // เปอร์เซ็นต์ความคืบหน้าโดยรวมของโครงการ
+    routeCount: 40, // จำนวนสายทาง
+    distance: "2,828.57", // ระยะทางรวม
     progress: 100, // ความคืบหน้าการสำรวจ
     statusType: "success", // สถานะความคืบหน้าการสำรวจ
-    statusText: "เสร็จสิ้น : 2,828.57 กม.", // ข้อความสถานะความคืบหน้าการสำรวจ
+    statusText: "เสร็จสิ้น : 2,828.57 กม.", // ข้อความสถานะ
   },
+
   phase2: {
     label: "Phase 2",
     themeClass: "section-green",
-    overviewPercent: "41.44", //เปอร์เซ็นต์ความคืบหน้าโดยรวมของโครงการ
-    routeCount: 56, //จำนวนสายทาง
-    distance: "3,040.628", //ระยะทางรวม
-    progress: 86.64, // ความคืบหน้าการสำรวจ
-    statusType: "processing", // สถานะความคืบหน้าการสำรวจ
-    statusText: "ดำเนินการไปแล้ว : 2,634.432 กม.", // ข้อความสถานะความคืบหน้าการสำรวจ
+    overviewPercent: "41.44",
+    routeCount: 56,
+    distance: "3,040.628",
+    progress: 86.64,
+    statusType: "processing",
+    statusText: "ดำเนินการไปแล้ว : 2,634.432 กม.",
   },
+
+  // phase3: {
+  //   label: "Phase 3",
+  //   themeClass: "section-purple",
+  //   overviewPercent: "0",
+  //   routeCount: 0,
+  //   distance: "0",
+  //   progress: 0,
+  //   statusType: "waiting",
+  //   statusText: "ยังไม่เริ่มดำเนินการ : 0 กม.",
+  // },
 };
 
 const phaseList = Object.keys(phaseConfig);
 
-const dashboardData = computed(() => phaseConfig[selectedTab.value]);
+const dashboardData = computed(() => {
+  return phaseConfig[selectedTab.value] || phaseConfig.phase1;
+});
 
 const themeClass = computed(() => dashboardData.value.themeClass);
 
@@ -58,6 +76,7 @@ watch(selectedTab, async () => {
       ความคืบหน้าโครงการ
     </h3>
 
+    <!-- PHASE TAB -->
     <div class="tabs" data-aos="fade-up" data-aos-delay="100">
       <button
         v-for="phase in phaseList"
@@ -118,7 +137,7 @@ watch(selectedTab, async () => {
         </div>
       </div>
 
-      <!-- PROGRESS ROW: เต็มแถว -->
+      <!-- PROGRESS ROW -->
       <div class="progress-row" :class="themeClass" data-aos="fade-right">
         <div class="box progress-box">
           <div class="progress-header">
@@ -152,7 +171,7 @@ watch(selectedTab, async () => {
         </div>
       </div>
 
-      <!-- MAP ROW: ไม่ยุ่งกับรูป -->
+      <!-- MAP ROW -->
       <div class="bottom-row">
         <div
           class="box full-width"
@@ -390,6 +409,11 @@ button:active {
   color: #d97706;
 }
 
+.status-badge.waiting {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
 /* OVERVIEW SECTION */
 .overview-section {
   width: 100%;
@@ -460,22 +484,8 @@ button:active {
   color: #2563eb;
 }
 
-/* SECTION TITLE */
-.section-title-row {
-  width: 100%;
-  margin-bottom: 14px;
-}
-
-.section-title-row h3 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 800;
-  color: #1e293b;
-}
-
 /* =========================
    PHASE COLOR THEME
-   คงสไตล์เดิม แต่เปลี่ยนสีตาม Phase
 ========================= */
 
 /* Phase 1: ฟ้า */
@@ -529,6 +539,41 @@ button:active {
   box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
 }
 
+/* Phase 3: ม่วง */
+.section-purple .stat-value,
+.section-purple .progress-percent,
+.section-purple .overview-percent,
+.section-purple .overview-unit {
+  color: #7c3aed;
+}
+
+.section-purple.overview-section {
+  border-color: rgba(124, 58, 237, 0.22);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(196, 181, 253, 0.35),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #faf5ff 0%, #ffffff 48%, #f5f3ff 100%);
+}
+
+.section-purple.overview-section::before {
+  background: rgba(124, 58, 237, 0.12);
+}
+
+.section-purple .overview-percent-wrap {
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.12);
+}
+
+.section-purple .progress-fill {
+  background: linear-gradient(90deg, #c4b5fd 0%, #a78bfa 45%, #7c3aed 100%);
+}
+
+.section-purple .progress-fill.active {
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08);
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 992px) {
   .top-row {
@@ -562,6 +607,15 @@ button:active {
   .progress-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .overview-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .overview-percent-wrap {
+    width: 100%;
   }
 }
 </style>

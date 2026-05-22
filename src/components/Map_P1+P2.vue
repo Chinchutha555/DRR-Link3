@@ -3,8 +3,10 @@ import { ref, computed, watch, onMounted, nextTick } from "vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
+
 import phase1Data from "../data/route_long_phase1.json";
 import phase2Data from "../data/route_long_phase2.json";
+// import phase3Data from "../data/route_long_phase2.json";
 
 // ── props ──────────────────────────────────────────────
 const props = defineProps({
@@ -24,96 +26,140 @@ const selectedRegion = ref("all");
 const labelMarkers = ref([]);
 const geoJsonKey = ref(0);
 
-// ── region config ─────────────────────────────────────
-const REGION_LABEL_MAP = computed(() => {
-  if (props.phase === "phase1") {
-    return {
-      ภาคเหนือ: "ภาคเหนือ",
-      ภาคตะวันออกเฉียงเหนือ: "ภาคอีสานตอนบน",
-    };
-  } else if (props.phase === "phase2") {
-    return {
-      lowerNortheast: "ภาคอีสานตอนล่าง",
-      east: "ภาคตะวันออก",
-      upperCentral: "ภาคกลางตอนบน",
-    };
-  }
-  return {};
+/**
+ * จุดแก้หลักเวลาเพิ่ม Phase ใหม่ในแผนที่
+ * ถ้ามี P3, P4 ให้เพิ่มข้อมูลใน phaseMapConfig
+ */
+const phaseMapConfig = {
+  phase1: {
+    label: "Phase 1",
+    data: phase1Data,
+    regions: [
+      {
+        key: "ภาคเหนือ",
+        label: "ภาคเหนือ",
+      },
+      {
+        key: "ภาคตะวันออกเฉียงเหนือ",
+        label: "ภาคอีสานตอนบน",
+      },
+    ],
+  },
+
+  phase2: {
+    label: "Phase 2",
+    data: phase2Data,
+    regions: [
+      {
+        key: "ภาคอีสานตอนล่าง",
+        label: "ภาคอีสานตอนล่าง",
+      },
+      {
+        key: "ภาคตะวันออก",
+        label: "ภาคตะวันออก",
+      },
+      {
+        key: "ภาคกลางตอนบน",
+        label: "ภาคกลางตอนบน",
+      },
+    ],
+  },
+
+  // phase3: {
+  //   label: "Phase 3",
+  //   data: phase3Data,
+  //   regions: [
+  //     {
+  //       key: "ภาคกลางตอนล่าง",
+  //       label: "ภาคกลางตอนล่าง",
+  //     },
+  //     {
+  //       key: "ภาคใต้",
+  //       label: "ภาคใต้",
+  //     },
+  //   ],
+  // },
+};
+
+// ── computed: current phase ───────────────────────────
+const currentPhaseConfig = computed(() => {
+  return phaseMapConfig[props.phase] || phaseMapConfig.phase1;
+});
+
+const currentData = computed(() => {
+  return currentPhaseConfig.value.data;
+});
+
+const phaseLabel = computed(() => {
+  return currentPhaseConfig.value.label;
 });
 
 const regionOptions = computed(() => {
-  const seen = new Set();
-  if (props.phase === "phase1") {
-    seen.add("ภาคเหนือ");
-    seen.add("ภาคตะวันออกเฉียงเหนือ");
-  } else if (props.phase === "phase2") {
-    seen.add("ภาคอีสานตอนล่าง");
-    seen.add("ภาคตะวันออก");
-    seen.add("ภาคกลางตอนบน");
-  }
-  const dynamicOptions = [...seen].sort().map((r) => ({
-    key: r,
-    label: REGION_LABEL_MAP.value[r] || r,
-  }));
-  return [{ key: "all", label: "ทั้งหมด" }, ...dynamicOptions];
+  return [
+    {
+      key: "all",
+      label: "ทั้งหมด",
+    },
+    ...currentPhaseConfig.value.regions,
+  ];
 });
-
-// ── helper: กรอง features ที่มี coordinates ว่างออก ──
-function hasCoordinates(feature) {
-  const coords = feature?.geometry?.coordinates;
-  if (!coords || coords.length === 0) return false;
-  // MultiLineString: coordinates = [segment, ...] ต้องมี segment ที่ไม่ว่าง
-  if (feature.geometry.type === "MultiLineString") {
-    return coords.some((segment) => segment.length > 0);
-  }
-  // LineString: coordinates = [[lon,lat], ...]
-  return coords.length > 0;
-}
-
-// ── computed ──────────────────────────────────────────
-const phaseLabel = computed(() =>
-  props.phase === "phase1" ? "Phase 1" : "Phase 2",
-);
 
 const regionLabel = computed(() => {
   const found = regionOptions.value.find((r) => r.key === selectedRegion.value);
   return found ? found.label : "ทั้งหมด";
 });
 
+// ── helper: กรอง features ที่มี coordinates ว่างออก ──
+function hasCoordinates(feature) {
+  const coords = feature?.geometry?.coordinates;
+
+  if (!coords || coords.length === 0) return false;
+
+  if (feature.geometry.type === "MultiLineString") {
+    return coords.some((segment) => segment.length > 0);
+  }
+
+  if (feature.geometry.type === "LineString") {
+    return coords.length > 0;
+  }
+
+  return false;
+}
+
+// ── computed: filtered geojson ─────────────────────────
 const filteredFeatures = computed(() => {
-  // เลือกข้อมูลตาม phase
-  const data =
-    props.phase === "phase2" ? phase2Data.features : phase1Data.features;
+  const validFeatures = currentData.value.features.filter(hasCoordinates);
 
-  // กรองข้อมูลที่มีพิกัดที่ไม่ว่าง
-  const validFeatures = data.filter(hasCoordinates);
-
-  // กรองข้อมูลตาม selectedRegion
   if (selectedRegion.value === "all") {
     return validFeatures;
   }
 
-  // กรองข้อมูลตามภูมิภาคที่เลือก
-  return validFeatures.filter(
-    (f) => f.properties.region === selectedRegion.value,
-  );
+  return validFeatures.filter((feature) => {
+    return feature.properties.region === selectedRegion.value;
+  });
 });
 
-const geoJsonCollection = computed(() => ({
-  type: "FeatureCollection",
-  features: filteredFeatures.value,
-}));
+const geoJsonCollection = computed(() => {
+  return {
+    type: "FeatureCollection",
+    features: filteredFeatures.value,
+  };
+});
 
 // ── style ─────────────────────────────────────────────
 function styleGeoJson(feature) {
   const region = feature.properties.region;
+
   const colorMap = {
     ภาคเหนือ: "#2563eb",
-    ภาคตะวันออกเฉียงเหนือ: "#16a34a", //อีสานตอนบน
+    ภาคตะวันออกเฉียงเหนือ: "#16a34a",
     ภาคอีสานตอนล่าง: "#0891b2",
-    ภาคกลางตอนบน: "#C90F12",
+    ภาคกลางตอนบน: "#c90f12",
     ภาคตะวันออก: "#7c3aed",
+    ภาคกลางตอนล่าง: "#f97316",
+    ภาคใต้: "#0f766e",
   };
+
   return {
     color: colorMap[region] || "#94a3b8",
     weight: 5,
@@ -124,25 +170,26 @@ function styleGeoJson(feature) {
 // ── label helpers ─────────────────────────────────────
 function clearLabels() {
   if (!mapInstance.value) return;
-  labelMarkers.value.forEach((m) => m.remove());
+
+  labelMarkers.value.forEach((marker) => {
+    marker.remove();
+  });
+
   labelMarkers.value = [];
 }
 
-// FIX: รองรับทั้ง LineString และ MultiLineString
 function getLineCenter(geometry) {
-  let latSum = 0,
-    lonSum = 0,
-    count = 0;
+  let latSum = 0;
+  let lonSum = 0;
+  let count = 0;
 
   if (geometry.type === "LineString") {
-    // coordinates = [[lon, lat], [lon, lat], ...]
     geometry.coordinates.forEach(([lon, lat]) => {
       latSum += lat;
       lonSum += lon;
       count++;
     });
   } else if (geometry.type === "MultiLineString") {
-    // coordinates = [[[lon, lat], ...], [[lon, lat], ...], ...]
     geometry.coordinates.forEach((segment) => {
       segment.forEach(([lon, lat]) => {
         latSum += lat;
@@ -152,17 +199,21 @@ function getLineCenter(geometry) {
     });
   }
 
-  return count > 0 ? [latSum / count, lonSum / count] : null;
+  if (count === 0) return null;
+
+  return [latSum / count, lonSum / count];
 }
 
 function addLabels(map) {
   const seen = new Set();
+
   filteredFeatures.value.forEach((feature) => {
     const name = feature.properties.field_2;
+
     if (!name || seen.has(name)) return;
+
     seen.add(name);
 
-    // FIX: ส่ง geometry object แทนแค่ coordinates
     const labelCenter = getLineCenter(feature.geometry);
     if (!labelCenter) return;
 
@@ -173,9 +224,11 @@ function addLabels(map) {
       iconAnchor: [75, 18],
     });
 
-    const marker = L.marker(labelCenter, { icon, interactive: false }).addTo(
-      map,
-    );
+    const marker = L.marker(labelCenter, {
+      icon,
+      interactive: false,
+    }).addTo(map);
+
     labelMarkers.value.push(marker);
   });
 }
@@ -183,8 +236,11 @@ function addLabels(map) {
 // ── zoom handler ──────────────────────────────────────
 function onZoomEnd() {
   if (!mapInstance.value) return;
+
   const currentZoom = mapInstance.value.getZoom();
+
   clearLabels();
+
   if (currentZoom >= 9) {
     addLabels(mapInstance.value);
   }
@@ -192,29 +248,31 @@ function onZoomEnd() {
 
 // ── click handler ─────────────────────────────────────
 function onLineClick(event) {
-  const p = event.layer?.feature?.properties;
-  if (!p) return;
+  const properties = event.layer?.feature?.properties;
+
+  if (!properties) return;
+
   L.popup()
     .setLatLng(event.latlng)
-    .setContent(`<b>${p.field_2}</b>`)
+    .setContent(`<b>${properties.field_2}</b>`)
     .openOn(mapInstance.value);
 }
 
 // ── bounds ────────────────────────────────────────────
-// FIX: คำนวณ bounds จากข้อมูลจริงของ features ที่กรองแล้ว
 function getBoundsFromFeatures(features) {
-  let minLat = Infinity,
-    maxLat = -Infinity;
-  let minLon = Infinity,
-    maxLon = -Infinity;
+  let minLat = Infinity;
+  let maxLat = -Infinity;
+  let minLon = Infinity;
+  let maxLon = -Infinity;
 
   features.forEach((feature) => {
-    const geom = feature.geometry;
+    const geometry = feature.geometry;
+
     const allCoords =
-      geom.type === "LineString"
-        ? geom.coordinates
-        : geom.type === "MultiLineString"
-          ? geom.coordinates.flat()
+      geometry.type === "LineString"
+        ? geometry.coordinates
+        : geometry.type === "MultiLineString"
+          ? geometry.coordinates.flat()
           : [];
 
     allCoords.forEach(([lon, lat]) => {
@@ -226,86 +284,79 @@ function getBoundsFromFeatures(features) {
   });
 
   if (minLat === Infinity) return null;
+
   return [
     [minLat, minLon],
     [maxLat, maxLon],
   ];
 }
 
-const REGION_BOUNDS = {
-  ภาคเหนือ: [
-    [16.8215, 97.7533],
-    [20.0983, 101.021],
-  ],
-  ภาคตะวันออกเฉียงเหนือ: [
-    [14.0, 101.0],
-    [18.2759, 104.7909],
-  ],
-};
-
-// FIX: ALL_BOUNDS ขยายให้ครอบคลุมทุก feature จริงๆ
-// โดยใช้ static fallback กว้างขึ้น หรือคำนวณจาก data
 const ALL_BOUNDS_FALLBACK = [
-  [13.5, 97.0],
-  [20.5, 105.5],
+  [5.5, 97.0],
+  [20.5, 105.8],
 ];
 
-function flyToRegion(key) {
+function fitMapToFeatures(features) {
   if (!mapInstance.value) return;
 
-  if (key === "all") {
-    // FIX: คำนวณ bounds จาก features จริงทั้งหมด
-    const bounds =
-      getBoundsFromFeatures(filteredFeatures.value) || ALL_BOUNDS_FALLBACK;
-    mapInstance.value.flyToBounds(bounds, { padding: [40, 40], duration: 0.8 });
-  } else if (REGION_BOUNDS[key]) {
-    mapInstance.value.flyToBounds(REGION_BOUNDS[key], {
-      padding: [40, 40],
-      duration: 0.8,
-    });
-  } else {
-    // FIX: ถ้าไม่มีใน REGION_BOUNDS ให้คำนวณจาก features ที่กรองแล้ว
-    const features = (
-      props.phase === "phase2" ? phase2Data : phase1Data
-    ).features.filter((f) => f.properties.region === key && hasCoordinates(f));
-    const bounds = getBoundsFromFeatures(features);
-    if (bounds) {
-      mapInstance.value.flyToBounds(bounds, {
-        padding: [40, 40],
-        duration: 0.8,
-      });
-    }
-  }
+  const bounds = getBoundsFromFeatures(features) || ALL_BOUNDS_FALLBACK;
+
+  mapInstance.value.fitBounds(bounds, {
+    padding: [30, 30],
+  });
+}
+
+function flyToFeatures(features) {
+  if (!mapInstance.value) return;
+
+  const bounds = getBoundsFromFeatures(features) || ALL_BOUNDS_FALLBACK;
+
+  mapInstance.value.flyToBounds(bounds, {
+    padding: [40, 40],
+    duration: 0.8,
+  });
+}
+
+async function refreshMapView() {
+  await nextTick();
+
+  geoJsonKey.value++;
+  clearLabels();
+
+  flyToFeatures(filteredFeatures.value);
 }
 
 // ── region selection ──────────────────────────────────
 async function selectRegion(key) {
   selectedRegion.value = key;
-  await nextTick();
-  geoJsonKey.value++;
-  clearLabels();
-  flyToRegion(key);
+  await refreshMapView();
 }
 
 // ── map ready ─────────────────────────────────────────
 function onMapReady(map) {
   mapInstance.value = map;
-  // กรอง empty coordinates ออกก่อนคำนวณ bounds
-  const validFeatures = (
-    props.phase === "phase2" ? phase2Data : phase1Data
-  ).features.filter(hasCoordinates);
-  const bounds = getBoundsFromFeatures(validFeatures) || ALL_BOUNDS_FALLBACK;
-  map.fitBounds(bounds, { padding: [30, 30] });
+
+  const validFeatures = currentData.value.features.filter(hasCoordinates);
+
+  fitMapToFeatures(validFeatures);
+
   map.invalidateSize();
 }
 
-// ── watch ────────────────────────────────────────────
+// ── watch phase change ────────────────────────────────
 watch(
   () => props.phase,
-  (newPhase) => {
-    if (newPhase === "phase2" || newPhase === "phase1") {
-      selectedRegion.value = "all";
-    }
+  async () => {
+    selectedRegion.value = "all";
+
+    await nextTick();
+
+    geoJsonKey.value++;
+    clearLabels();
+
+    const validFeatures = currentData.value.features.filter(hasCoordinates);
+
+    fitMapToFeatures(validFeatures);
   },
 );
 
@@ -318,6 +369,7 @@ onMounted(() => {
   <div class="project-map">
     <div class="map-header">
       <h3 class="map-title">แผนที่โครงการ</h3>
+
       <div class="map-toolbar">
         <button
           v-for="item in regionOptions"
@@ -332,15 +384,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="map-subtitle" v-if="props.phase === 'phase1'">
-      <span>ข้อมูลที่แสดง:</span>
-      <strong>{{ phaseLabel }}</strong>
-      <span class="divider">|</span>
-      <span>พื้นที่:</span>
-      <strong>{{ regionLabel }}</strong>
-    </div>
-
-    <div class="map-subtitle" v-if="props.phase === 'phase2'">
+    <div class="map-subtitle">
       <span>ข้อมูลที่แสดง:</span>
       <strong>{{ phaseLabel }}</strong>
       <span class="divider">|</span>
@@ -363,14 +407,9 @@ onMounted(() => {
           layer-type="base"
           name="OpenStreetMap"
         />
+
         <l-geo-json
-          v-if="props.phase === 'phase1'"
-          :geojson="geoJsonCollection"
-          :options-style="styleGeoJson"
-          @click="onLineClick"
-        />
-        <l-geo-json
-          v-if="props.phase === 'phase2'"
+          :key="geoJsonKey"
           :geojson="geoJsonCollection"
           :options-style="styleGeoJson"
           @click="onLineClick"
@@ -419,7 +458,8 @@ onMounted(() => {
   font-size: 14px;
   transition:
     background 0.15s,
-    color 0.15s;
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .region-btn:hover {
@@ -475,5 +515,20 @@ onMounted(() => {
   font-size: 12px;
   font-weight: 600;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .map-header {
+    align-items: flex-start;
+  }
+
+  .map-wrapper {
+    height: 420px;
+  }
+
+  .region-btn {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
 }
 </style>
